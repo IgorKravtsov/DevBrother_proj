@@ -1,9 +1,9 @@
 import React from 'react';
 import {BrowserRouter as Router, Redirect, Route, Routes, Switch} from "react-router-dom";
 import {LoginRoute, MainRoute, RegisterRoute, routes} from "../routes";
-import MainPage from "../pages/mainPage";
-import LoginPage from "../pages/loginPage/loginPage";
-import RegisterPage from "../pages/registerPage/registerPage";
+import MainPage from "../pages/MainPage";
+import LoginPage from "../pages/loginPage/LoginPage";
+import RegisterPage from "../pages/registerPage/RegisterPage";
 
 const AppRouter = () => {
 

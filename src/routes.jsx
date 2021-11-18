@@ -1,5 +1,5 @@
-import LoginPage from "./pages/loginPage/loginPage";
-import RegisterPage from "./pages/registerPage/registerPage";
+import LoginPage from "./pages/loginPage/LoginPage";
+import RegisterPage from "./pages/registerPage/RegisterPage";
 
 export const MainRoute = "/";
 export const LoginRoute = "/login";
