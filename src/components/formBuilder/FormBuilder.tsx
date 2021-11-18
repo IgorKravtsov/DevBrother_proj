@@ -80,12 +80,13 @@ const FormBuilder:FC<FormBuilderProps> = (
             {itemProperties.map((prop, index) =>
                 <Input
                     {...prop}
+                    key={prop.name}
                     onChange={(e: ChangeEvent<HTMLInputElement>) => setValue(e, index)}
                     onBlur={() => checkValidation(index)}
                     error={prop.validationError}
                 />
             )}
-            <Button classes={styles.button}>SEND</Button>
+            <Button classes={styles.button}>SUBMIT</Button>
         </Form>
     );
 };
