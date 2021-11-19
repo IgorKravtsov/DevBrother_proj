@@ -6,6 +6,7 @@ import Button from "../button/Button";
 import {IInputConfigs} from "../../types/IInputConfigs";
 import * as util from "../../util/util";
 import styles from './formBuilder.module.scss'
+import {checkTheSameValue} from "../../util/util";
 
 export  interface FormBuilderProps {
     formConfig: IFormConfig[];
@@ -32,7 +33,7 @@ const FormBuilder:FC<FormBuilderProps> = (
         setItemProperties(newItemProperties);
     }
 
-    const getErrorString = (value: string, validations: IValidation[] | undefined = []): string => {
+    const getErrorString = (value: string, validations: IValidation[] | undefined = [], index: number): string => {
         let res = '';
         for(const validation of validations) {
             switch (validation.type) {
@@ -49,9 +50,18 @@ const FormBuilder:FC<FormBuilderProps> = (
 
                 case "isEmail":
                     if(util.isEmail(value)) {
-                        res += `incorrect email`;
+                        res += `incorrect email\n`;
                     }
                     break;
+                case "theSameAs":
+                    const test = itemProperties.filter(item => item.name === validation.validValue)
+                        .filter(valueNeeded => checkTheSameValue(value, valueNeeded.value));
+
+                    if(test.length === 0) {
+                        res += `not corresponds to "${validation.validValue}"\n`;
+                    }
+                    break;
+
                 default:
                     return '';
             }
@@ -64,7 +74,8 @@ const FormBuilder:FC<FormBuilderProps> = (
         if(newItemProperties[index].validations) {
             newItemProperties[index].validationError = getErrorString(
                 newItemProperties[index].value,
-                newItemProperties[index].validations
+                newItemProperties[index].validations,
+                index
             );
         }
         setItemProperties(newItemProperties);

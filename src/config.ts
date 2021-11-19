@@ -1,7 +1,7 @@
 
 export interface IValidation {
-    type: "maxLength" | "minLength" | "isEmail";
-    validValue: string | number | void;
+    type: "maxLength" | "minLength" | "isEmail" | "theSameAs";
+    validValue: string | number;
 }
 
 export interface IFormConfig {
@@ -78,6 +78,10 @@ export  const  registerFormConfig: IFormConfig[] = [
                 type: "minLength",
                 validValue: 6
             },
+            {
+                type: "theSameAs",
+                validValue: "password"
+            }
 
         ]
     },
