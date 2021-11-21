@@ -1,7 +1,7 @@
 import React, {ReactElement, useState, useEffect} from 'react';
 import FormBuilder from "../../components/formBuilder/FormBuilder";
-import {Link} from "react-router-dom";
-import {LoginRoute} from "../../routes";
+import {Link, useNavigate} from "react-router-dom";
+import {RouteNames} from "../../routes";
 import styles from './registerSection.module.scss';
 import {IFormConfig} from "../../config";
 import {IInputConfigs} from "../../types/IInputConfigs";
@@ -16,6 +16,7 @@ export interface RegisterSectionProps {
 const RegisterSection:React.FC<RegisterSectionProps> = ({config}): ReactElement => {
     const [inputs, setInputs] = useState<IInputConfigs[]>([]);
     const {setUserData} = useActions();
+    const navigate = useNavigate();
 
     useEffect(() => {
         const errors = inputs.filter(input => input.validationError !== '');
@@ -35,11 +36,12 @@ const RegisterSection:React.FC<RegisterSectionProps> = ({config}): ReactElement 
             });
             if(userData.login !== '' && userData.password !== '') {
                 setUserData(userData);
+                navigate(RouteNames.LOGIN);
             }
         }
 
-    }, [inputs])
 
+    }, [inputs])
 
     return (
         <div className={styles.wrapper}>
@@ -49,7 +51,7 @@ const RegisterSection:React.FC<RegisterSectionProps> = ({config}): ReactElement 
                 Already have an account?
                 <Link
                     className={styles.anchor}
-                    to={LoginRoute}
+                    to={RouteNames.LOGIN}
                 > Login</Link>
             </h5>
         </div>

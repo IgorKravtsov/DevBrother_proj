@@ -2,21 +2,34 @@ import React, {ReactElement, useEffect, useState} from 'react';
 import {IFormConfig} from "../../config";
 import FormBuilder from "../../components/formBuilder/FormBuilder";
 import styles from "./loginSection.module.scss";
-import {Link} from "react-router-dom";
-import {RegisterRoute} from "../../routes";
+import {Link, useNavigate} from "react-router-dom";
+import {RouteNames} from "../../routes";
 import {IInputConfigs} from "../../types/IInputConfigs";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
 import {UserDTO} from "../../models/userDTO";
+import Error from "../../components/error/Error";
 
 export interface LoginSectionProps {
     config: IFormConfig[];
 }
 
 const LoginSection:React.FC<LoginSectionProps> = ({config}): ReactElement => {
+    const [credentialsError, setCredentialsError] = useState('');
+    const [firstTimePageOpened, setFirstTimePageOpened] = useState(true);
     const [inputs, setInputs] = useState<IInputConfigs[]>([]);
+    const navigate = useNavigate();
     const {userData} = useTypedSelector(state => state.userReducer);
 
     useEffect(() => {
+        if(!firstTimePageOpened) {
+            checkInputData();
+        }
+        setFirstTimePageOpened(false);
+    }, [inputs])
+
+    const checkInputData = () => {
+        setCredentialsError('');
+        console.log("credentialsError", credentialsError)
         console.log("userData", userData)
         const errors = inputs.filter(input => input.validationError !== '');
         if(errors.length === 0) {
@@ -31,32 +44,43 @@ const LoginSection:React.FC<LoginSectionProps> = ({config}): ReactElement => {
                         break;
                 }
             });
-            console.log("userDataFromInputs", userDataFromInputs)
             if(Object.keys(userData).includes("login")) {
                 console.log("REDUX")
-                console.log(userDataFromInputs.login === userData.login && userDataFromInputs.password === userData.password)
+                checkCreditsAndGoToAnotherPage(userDataFromInputs, userData)
             } else {
                 console.log("LOCAL STORAGE");
                 const userDataFromLocalStorage =  localStorage.getItem("userData");
                 if(!userDataFromLocalStorage) {
-                    console.log("ЗАРЕГИСТРИРУЙТЕСЬ!");
+                    setCredentialsError('You need to register at first!');
                 }
                 const objUserData = userDataFromLocalStorage && JSON.parse(userDataFromLocalStorage);
-                // console.log(objUserData.login === userDataFromInputs.login && objUserData.password === userDataFromInputs.password)
+                checkCreditsAndGoToAnotherPage(userDataFromInputs, objUserData);
             }
         }
-    }, [inputs])
+    }
 
+    const checkCredentials = (firstUserData: UserDTO, secondUserData: UserDTO): boolean => {
+        return firstUserData.login === secondUserData.login && firstUserData.password === secondUserData.password;
+    }
+
+    const checkCreditsAndGoToAnotherPage = (firstUserData: UserDTO, secondUserData: UserDTO) => {
+        if(checkCredentials(firstUserData, secondUserData)) {
+            navigate(RouteNames.PRODUCTS)
+        } else {
+            setCredentialsError('Incorrect login or password!');
+        }
+    }
 
     return (
         <div className={styles.wrapper}>
             <h2 className={styles.promo}>LOGIN</h2>
+            {<Error isVisible={credentialsError !== ''}>{credentialsError}</Error>}
             <FormBuilder setInputValues={setInputs} formConfig={config}/>
             <h5>
                 Don't have account yet?
                 <Link
                     className={styles.anchor}
-                    to={RegisterRoute}
+                    to={RouteNames.REGISTER}
                 > Register</Link>
             </h5>
         </div>

@@ -18,11 +18,11 @@ export  const  loginFormConfig: IFormConfig[] = [
         type: 'text',
         validations: [
             {
-                type: "minLength",
+                type: 'minLength',
                 validValue: 3
             },
             {
-                type: "maxLength",
+                type: 'maxLength',
                 validValue: 22
             },
         ]
@@ -33,7 +33,7 @@ export  const  loginFormConfig: IFormConfig[] = [
         type: 'password',
         validations: [
             {
-                type: "minLength",
+                type: 'minLength',
                 validValue: 6
             },
 
@@ -48,11 +48,11 @@ export  const  registerFormConfig: IFormConfig[] = [
         type: 'text',
         validations: [
             {
-                type: "minLength",
+                type: 'minLength',
                 validValue: 3
             },
             {
-                type: "maxLength",
+                type: 'maxLength',
                 validValue: 22
             },
         ]
@@ -63,7 +63,7 @@ export  const  registerFormConfig: IFormConfig[] = [
         type: 'password',
         validations: [
             {
-                type: "minLength",
+                type: 'minLength',
                 validValue: 6
             },
 
@@ -75,12 +75,12 @@ export  const  registerFormConfig: IFormConfig[] = [
         type: 'password',
         validations: [
             {
-                type: "minLength",
+                type: 'minLength',
                 validValue: 6
             },
             {
-                type: "theSameAs",
-                validValue: "password"
+                type: 'theSameAs',
+                validValue: 'password'
             }
 
         ]
