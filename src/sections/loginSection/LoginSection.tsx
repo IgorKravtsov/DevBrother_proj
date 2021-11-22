@@ -1,4 +1,4 @@
-import React, {ReactElement, useEffect, useState} from 'react';
+import React, {FC, ReactElement, useEffect, useState} from 'react';
 import {IFormConfig} from "../../config";
 import FormBuilder from "../../components/formBuilder/FormBuilder";
 import styles from "./loginSection.module.scss";
@@ -8,29 +8,45 @@ import {IInputConfigs} from "../../types/IInputConfigs";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
 import {UserDTO} from "../../models/userDTO";
 import Error from "../../components/error/Error";
+import {useActions} from "../../hooks/useActions";
 
 export interface LoginSectionProps {
     config: IFormConfig[];
 }
 
-const LoginSection:React.FC<LoginSectionProps> = ({config}): ReactElement => {
+const LoginSection:FC<LoginSectionProps> = ({config}): ReactElement => {
+
     const [credentialsError, setCredentialsError] = useState('');
-    const [firstTimePageOpened, setFirstTimePageOpened] = useState(true);
     const [inputs, setInputs] = useState<IInputConfigs[]>([]);
+
     const navigate = useNavigate();
     const {userData} = useTypedSelector(state => state.userReducer);
+    const {setUserData} = useActions();
 
     useEffect(() => {
-        if(!firstTimePageOpened) {
+        setCredentialsError('');
+        if(!isReduxStorageHasData()) {
+            const userDataFromLocalStorage =  localStorage.getItem("userData");
+            if(userDataFromLocalStorage) {
+                const objUserData = JSON.parse(userDataFromLocalStorage);
+                setUserData(objUserData);
+            } else {
+                setCredentialsError('You need to register at first!');
+            }
+        }
+    }, [])
+
+    useEffect(() => {
+        if(isReduxStorageHasData() && inputs.length > 0) {
             checkInputData();
         }
-        setFirstTimePageOpened(false);
     }, [inputs])
 
+    const isReduxStorageHasData = () => {
+        return Object.keys(userData).includes("login");
+    }
+
     const checkInputData = () => {
-        setCredentialsError('');
-        console.log("credentialsError", credentialsError)
-        console.log("userData", userData)
         const errors = inputs.filter(input => input.validationError !== '');
         if(errors.length === 0) {
             let userDataFromInputs: UserDTO = {login: '', password: ''};
@@ -44,18 +60,7 @@ const LoginSection:React.FC<LoginSectionProps> = ({config}): ReactElement => {
                         break;
                 }
             });
-            if(Object.keys(userData).includes("login")) {
-                console.log("REDUX")
-                checkCreditsAndGoToAnotherPage(userDataFromInputs, userData)
-            } else {
-                console.log("LOCAL STORAGE");
-                const userDataFromLocalStorage =  localStorage.getItem("userData");
-                if(!userDataFromLocalStorage) {
-                    setCredentialsError('You need to register at first!');
-                }
-                const objUserData = userDataFromLocalStorage && JSON.parse(userDataFromLocalStorage);
-                checkCreditsAndGoToAnotherPage(userDataFromInputs, objUserData);
-            }
+            checkCreditsAndGoToAnotherPage(userDataFromInputs, userData);
         }
     }
 
@@ -72,7 +77,7 @@ const LoginSection:React.FC<LoginSectionProps> = ({config}): ReactElement => {
     }
 
     return (
-        <div className={styles.wrapper}>
+        <section className={styles.wrapper}>
             <h2 className={styles.promo}>LOGIN</h2>
             {<Error isVisible={credentialsError !== ''}>{credentialsError}</Error>}
             <FormBuilder setInputValues={setInputs} formConfig={config}/>
@@ -83,7 +88,7 @@ const LoginSection:React.FC<LoginSectionProps> = ({config}): ReactElement => {
                     to={RouteNames.REGISTER}
                 > Register</Link>
             </h5>
-        </div>
+        </section>
     );
 };
 

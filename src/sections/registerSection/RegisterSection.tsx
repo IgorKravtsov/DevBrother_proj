@@ -39,12 +39,10 @@ const RegisterSection:React.FC<RegisterSectionProps> = ({config}): ReactElement 
                 navigate(RouteNames.LOGIN);
             }
         }
-
-
     }, [inputs])
 
     return (
-        <div className={styles.wrapper}>
+        <section className={styles.wrapper}>
             <h2 className={styles.promo}>REGISTER</h2>
             <FormBuilder setInputValues={setInputs} formConfig={config}/>
             <h5>
@@ -54,7 +52,7 @@ const RegisterSection:React.FC<RegisterSectionProps> = ({config}): ReactElement 
                     to={RouteNames.LOGIN}
                 > Login</Link>
             </h5>
-        </div>
+        </section>
     );
 };
 
