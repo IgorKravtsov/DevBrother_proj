@@ -2,7 +2,6 @@ import {UserDTO} from "../../models/userDTO";
 
 export interface UserState {
     userData: UserDTO;
-    isLoading: boolean;
 
 }
 

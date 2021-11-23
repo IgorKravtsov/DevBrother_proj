@@ -4,8 +4,6 @@ import {UserDTO} from "../../models/userDTO";
 
 const initialState: UserState = {
     userData: {} as UserDTO,
-    isLoading: false,
-
 }
 
 export default function userReducer(state= initialState, action: UserAction): UserState {
