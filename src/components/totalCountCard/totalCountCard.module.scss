@@ -12,6 +12,11 @@
   color: black;
   display: flex;
   margin: 0 auto;
+  
+  &_disabled {
+    cursor: default;
+    pointer-events: none;
+  }
 }
 
 .text_wrapper {

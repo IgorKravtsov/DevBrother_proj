@@ -20,7 +20,7 @@ const TotalCountCard:FC<ProductCardProps> = (
 ) => {
     return (
         <div>
-            <Link className={styles.link} to={path}>
+            <Link className={[styles.link, isLoading ? styles.link_disabled : ''].join(' ')} to={path}>
                 <div className={styles.card}>
                     {isLoading ?
                         <Spinner classes={styles.spinner}/> :
