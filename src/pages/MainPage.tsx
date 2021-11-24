@@ -6,7 +6,10 @@ const MainPage = () => {
     return (
         <div>
             <Link to={RouteNames.LOGIN}>
-                <h5>Login</h5>
+                <h5>LOGIN</h5>
+            </Link>
+            <Link to={RouteNames.PRODUCTS}>
+                <h5>PRODUCTS</h5>
             </Link>
         </div>
     );

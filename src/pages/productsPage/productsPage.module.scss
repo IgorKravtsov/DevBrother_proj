@@ -1,0 +1,19 @@
+.wrapper {
+background-color: var(--main-back-color-products);
+  height: 100vh;
+}
+
+.title {
+  text-align: center;
+  margin: 0;
+  padding-top: 20px;
+  color: var(--main-text-color-products);
+}
+
+.cards {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 30px;
+  width: 800px;
+  margin: 0 auto;
+}
