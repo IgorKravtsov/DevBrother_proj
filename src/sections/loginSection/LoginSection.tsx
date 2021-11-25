@@ -6,7 +6,7 @@ import {Link, useNavigate} from "react-router-dom";
 import {RouteNames} from "../../routes";
 import {IInputConfigs} from "../../types/IInputConfigs";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
-import {UserDTO} from "../../interfaces/userDTO";
+import {UserDTO} from "../../models/userDTO";
 import Error from "../../components/error/Error";
 import {useActions} from "../../hooks/useActions";
 

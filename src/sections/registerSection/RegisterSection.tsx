@@ -5,7 +5,7 @@ import {RouteNames} from "../../routes";
 import styles from './registerSection.module.scss';
 import {IFormConfig} from "../../config";
 import {IInputConfigs} from "../../types/IInputConfigs";
-import {UserDTO} from "../../interfaces/userDTO";
+import {UserDTO} from "../../models/userDTO";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
 import {useActions} from "../../hooks/useActions";
 
