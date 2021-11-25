@@ -1,11 +1,9 @@
 import {setUserData, UserAction, UserState} from "../types/user";
-import {UserDTO} from "../../models/userDTO";
+import {UserDTO} from "../../interfaces/userDTO";
 
 
 const initialState: UserState = {
     userData: {} as UserDTO,
-    isLoading: false,
-
 }
 
 export default function userReducer(state= initialState, action: UserAction): UserState {

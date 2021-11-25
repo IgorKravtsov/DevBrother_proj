@@ -1,9 +1,7 @@
-import {UserDTO} from "../../models/userDTO";
+import {UserDTO} from "../../interfaces/userDTO";
 
 export interface UserState {
     userData: UserDTO;
-    isLoading: boolean;
-
 }
 
 enum UserActionsEnum {
