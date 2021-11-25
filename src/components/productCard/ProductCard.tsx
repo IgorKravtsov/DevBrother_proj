@@ -12,10 +12,12 @@ const ProductCard:FC<ProductCardProps> = (
         children,
     }): ReactElement => {
     return (
-        <div className={styles.card}>
-            <img className={styles.img} src={image.src} alt={image.alt}/>
+        <>
+            <p className={styles.img_wrapper}>
+                <img className={styles.img} src={image.src} alt={image.alt}/>
+            </p>
                 {children}
-        </div>
+        </>
     );
 };
 

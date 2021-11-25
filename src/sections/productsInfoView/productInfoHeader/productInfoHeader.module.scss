@@ -7,15 +7,27 @@
 }
 
 .changeViewBlock {
+  display: flex;
+  margin: 0;
   margin-left: auto;
 }
 
 .back {
   cursor: pointer;
-  padding-left: 30px;
-  width: 30px;
-  height: 30px;
+  width: 100%;
+  height: 100%;
+
+  &_wrapper {
+    width: 30px;
+    height: 30px;
+    margin: 0;
+    padding: 0;
+    padding-left: 30px;
+
+  }
 }
+
+
 
 .listSwitch {
   margin-right: 10px;

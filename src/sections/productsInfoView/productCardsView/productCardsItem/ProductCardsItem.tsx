@@ -1,7 +1,7 @@
 import React, {FC, ReactElement, useEffect, useState} from 'react';
 import styles from './productCardsItem.module.scss';
-import {ISwapiStarship} from "../../../../models/swapi-response/IStarshipResponse";
-import {ISwapiPeople} from "../../../../models/swapi-response/IPeopleResponse";
+import {ISwapiStarship} from "../../../../interfaces/swapi-response/IStarshipResponse";
+import {ISwapiPeople} from "../../../../interfaces/swapi-response/IPeopleResponse";
 import {IProductImage} from "../../../../pages/productInfoPage/assets/productImages";
 import {useSwapiTypeState} from "../../../../hooks/useSwapiTypeState";
 import ProductCard from "../../../../components/productCard/ProductCard";
@@ -18,29 +18,19 @@ const ProductCardsItem:FC<ProductCardsItemProps> = (
         image,
         type
     }): ReactElement => {
-    // const [itemsPeople, setItemsPeople] = useState<ISwapiPeople>();
-    // const [itemsStarships, setItemsStarships] = useState<ISwapiStarship>();
-    //
-    // useEffect(() => {
-    //     if(type === 'starships') {
-    //         setItemsStarships(product as ISwapiStarship);
-    //     } else if(type === 'people') {
-    //         setItemsPeople(product as ISwapiPeople);
-    //     }
-    // }, [])
-    const items = useSwapiTypeState(type, product);
+
+    const item = useSwapiTypeState(type, product);
 
     return (
-        <div className={styles.wrapper}>
+        <li className={styles.listItem}>
             {type === 'starships' ?
                 <ProductCard image={image}>
-                    <h3 className={styles.text}>MODEL: {items.starships?.model}</h3>
+                    <h3 className={styles.text}>MODEL: {item.starships?.model}</h3>
                 </ProductCard> :
                 <ProductCard image={image}>
-                    <h3 className={styles.text}>NAME: {items.people?.name}</h3>
-                </ProductCard>
-            }
-        </div>
+                    <h3 className={styles.text}>NAME: {item.people?.name}</h3>
+                </ProductCard>}
+        </li>
     );
 };
 

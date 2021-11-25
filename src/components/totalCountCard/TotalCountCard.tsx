@@ -19,19 +19,18 @@ const TotalCountCard:FC<ProductCardProps> = (
     }
 ) => {
     return (
-        <div>
-            <Link className={[styles.link, isLoading ? styles.link_disabled : ''].join(' ')} to={path}>
-                <div className={styles.card}>
-                    {isLoading ?
-                        <Spinner classes={styles.spinner}/> :
-                        <div className={styles.text_wrapper}>
-                            <h3 className={styles.title}>{title}</h3>
-                            <h2 className={styles.count}>{totalCount}</h2>
-                        </div>
-                    }
-                </div>
-            </Link>
-        </div>
+        <>
+            <Link className={[styles.link, isLoading ? styles.link_disabled : ''].join(' ')} to={path}/>
+            <div className={styles.cardList}>
+                {isLoading ?
+                    <Spinner classes={styles.spinner}/> :
+                    <>
+                        <h3 className={styles.title}>{title}</h3>
+                        <p className={styles.count}>{totalCount}</p>
+                    </>
+                }
+            </div>
+        </>
     );
 };
 

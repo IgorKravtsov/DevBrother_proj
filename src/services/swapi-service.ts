@@ -1,6 +1,6 @@
 import axios, {AxiosResponse} from "axios";
-import {IPeopleResponse} from "../models/swapi-response/IPeopleResponse";
-import {IStarshipResponse} from "../models/swapi-response/IStarshipResponse";
+import {IPeopleResponse} from "../interfaces/swapi-response/IPeopleResponse";
+import {IStarshipResponse} from "../interfaces/swapi-response/IStarshipResponse";
 
 export class SwapiService {
     static _baseUrl = "https://swapi.dev/api";

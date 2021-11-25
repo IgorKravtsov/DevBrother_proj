@@ -16,8 +16,8 @@ import {
     SetSwapiStarshipsDataAction,
     SetSwapiStarshipsTotalCountAction,
 } from "../types/swapiData";
-import {ISwapiPeople} from "../../models/swapi-response/IPeopleResponse";
-import {ISwapiStarship} from "../../models/swapi-response/IStarshipResponse";
+import {ISwapiPeople} from "../../interfaces/swapi-response/IPeopleResponse";
+import {ISwapiStarship} from "../../interfaces/swapi-response/IStarshipResponse";
 import {AppDispatch} from "../index";
 import {SwapiService} from "../../services/swapi-service";
 
@@ -36,7 +36,7 @@ export const swapiActionCreators = {
     setStarshipsTotalCount: (payload: number): SetSwapiStarshipsTotalCountAction => ({ type: setStarshipsTotalCount, payload }),
     setPeopleTotalCount: (payload: number): SetSwapiPeopleTotalCountAction => ({ type: setPeopleTotalCount, payload }),
 
-    fetchSwapiStarshipsData: () => async (dispatch: AppDispatch) => {
+    getStarshipsData: () => async (dispatch: AppDispatch) => {
         try {
             dispatch(swapiActionCreators.setStarshipsLoading(true));
             const res = await SwapiService.getStarships();
@@ -48,7 +48,7 @@ export const swapiActionCreators = {
             dispatch(swapiActionCreators.setStarshipsLoading(false));
         }
     },
-    fetchSwapiPeopleData: () => async (dispatch: AppDispatch) => {
+    getPeopleData: () => async (dispatch: AppDispatch) => {
         try {
             dispatch(swapiActionCreators.setPeopleLoading(true));
             const res = await SwapiService.getPeople();

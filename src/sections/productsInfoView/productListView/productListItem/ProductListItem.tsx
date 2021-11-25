@@ -1,7 +1,7 @@
 import React, {FC, useEffect, useState} from 'react';
 import styles from './productListItem.module.scss';
-import {ISwapiStarship} from "../../../../models/swapi-response/IStarshipResponse";
-import {ISwapiPeople} from "../../../../models/swapi-response/IPeopleResponse";
+import {ISwapiStarship} from "../../../../interfaces/swapi-response/IStarshipResponse";
+import {ISwapiPeople} from "../../../../interfaces/swapi-response/IPeopleResponse";
 import {IProductImage} from "../../../../pages/productInfoPage/assets/productImages";
 
 
@@ -21,28 +21,29 @@ const ProductListItem:FC<ProductListItemProps> = ({product, image,type}) => {
         } else if(type === 'people') {
             setItemsPeople(product as ISwapiPeople);
         }
+
     }, [])
 
     return (
-        <div className={styles.wrapper}>
-            <img className={styles.img} src={image.src} alt={image.alt}/>
-            <div className={styles.text}>
+        <li className={styles.wrapper}>
+            <p className={styles.img_wrapper}><img className={styles.img} src={image.src} alt={image.alt}/></p>
+            <ul className={styles.text}>
                 {type === 'starships' ?
                     itemsStarships &&
                     <>
-                        <h3>MODEL: {itemsStarships?.model}</h3>
-                        <h3>MANUFACTURER: {itemsStarships.manufacturer}</h3>
-                        <h3>COST: {itemsStarships?.cost_in_credits} $</h3>
+                        <li><h2 className={styles.title}>{itemsStarships?.model}</h2></li>
+                        <li><p>MANUFACTURER: {itemsStarships.manufacturer}</p></li>
+                        <li><p>COST: {itemsStarships?.cost_in_credits} $</p></li>
                     </> :
                     itemsPeople &&
                     <>
-                        <h3>NAME: {itemsPeople.name}</h3>
-                        <h3>GENDER: {itemsPeople?.gender}</h3>
-                        <h3>BORN AT: {itemsPeople?.birth_year}</h3>
+                        <li><h2 className={styles.title}>{itemsPeople.name}</h2></li>
+                        <li><p>GENDER: {itemsPeople?.gender}</p></li>
+                        <li><p>BORN AT: {itemsPeople?.birth_year}</p></li>
                     </>
                 }
-            </div>
-        </div>
+            </ul>
+        </li>
     );
 };
 

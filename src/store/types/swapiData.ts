@@ -1,5 +1,5 @@
-import {ISwapiStarship} from "../../models/swapi-response/IStarshipResponse";
-import {ISwapiPeople} from "../../models/swapi-response/IPeopleResponse";
+import {ISwapiStarship} from "../../interfaces/swapi-response/IStarshipResponse";
+import {ISwapiPeople} from "../../interfaces/swapi-response/IPeopleResponse";
 
 export interface IStarship {
     data: ISwapiStarship[];

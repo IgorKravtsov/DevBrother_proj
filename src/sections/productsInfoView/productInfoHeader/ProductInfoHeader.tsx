@@ -19,23 +19,23 @@ const ProductInfoHeader:FC<ProductInfoHeaderProps> = ({setView, nowView}) => {
     }
 
     return (
-        <div className={styles.header}>
-            <img src={backArrow} alt="BACK" onClick={back} className={styles.back}/>
+        <header className={styles.header}>
+            <p className={styles.back_wrapper}><img src={backArrow} alt="BACK" onClick={back} className={styles.back}/></p>
             <div className={styles.changeViewBlock}>
-                <img
+                <p><img
                     onClick={() => setView(LocalstorageValue.ProductCardView)}
                     className={[styles.listSwitch, nowView === LocalstorageValue.ProductCardView ? styles.listSwitch_active : ''].join(' ')}
                     src={squareIcon}
                     alt="card"
-                />
-                <img
+                /></p>
+                <p><img
                     onClick={() => setView(LocalstorageValue.ProductListView)}
                     className={[styles.listSwitch, nowView === LocalstorageValue.ProductListView ? styles.listSwitch_active : ''].join(' ')}
                     src={burger}
                     alt="list"
-                />
+                /></p>
             </div>
-        </div>
+        </header>
     );
 };
 
