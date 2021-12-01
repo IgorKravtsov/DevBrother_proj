@@ -1,5 +1,5 @@
-import {ISwapiStarship} from "../../interfaces/swapi-response/IStarshipResponse";
-import {ISwapiPeople} from "../../interfaces/swapi-response/IPeopleResponse";
+import {ISwapiStarship} from "../../../interfaces/swapi-response/IStarshipResponse";
+import {ISwapiPeople} from "../../../interfaces/swapi-response/IPeopleResponse";
 
 export interface IStarship {
     data: ISwapiStarship[];
@@ -20,7 +20,7 @@ export interface SwapiDataState {
     people: IPeople;
 }
 
-export enum SwapiActionsEnum {
+enum SwapiDataActionsEnum {
     SET_STARSHIPS_DATA='SET_STARSHIPS_DATA',
     SET_PEOPLE_DATA='SET_PEOPLE_DATA',
 
@@ -34,55 +34,55 @@ export enum SwapiActionsEnum {
     SET_PEOPLE_TOTAL_COUNT='SET_PEOPLE_TOTAL_COUNT',
 }
 
-export const setStarshipsData = SwapiActionsEnum.SET_STARSHIPS_DATA;
-export const setPeopleData = SwapiActionsEnum.SET_PEOPLE_DATA;
+export const setStarshipsData = SwapiDataActionsEnum.SET_STARSHIPS_DATA;
+export const setPeopleData = SwapiDataActionsEnum.SET_PEOPLE_DATA;
 
-export const setStarshipsLoading = SwapiActionsEnum.SET_STARSHIPS_LOADING;
-export const setPeopleLoading = SwapiActionsEnum.SET_PEOPLE_LOADING;
+export const setStarshipsLoading = SwapiDataActionsEnum.SET_STARSHIPS_LOADING;
+export const setPeopleLoading = SwapiDataActionsEnum.SET_PEOPLE_LOADING;
 
-export const setStarshipsError = SwapiActionsEnum.SET_STARSHIPS_ERROR;
-export const setPeopleError = SwapiActionsEnum.SET_PEOPLE_ERROR;
+export const setStarshipsError = SwapiDataActionsEnum.SET_STARSHIPS_ERROR;
+export const setPeopleError = SwapiDataActionsEnum.SET_PEOPLE_ERROR;
 
-export const setStarshipsTotalCount = SwapiActionsEnum.SET_STARSHIPS_TOTAL_COUNT;
-export const setPeopleTotalCount = SwapiActionsEnum.SET_PEOPLE_TOTAL_COUNT;
+export const setStarshipsTotalCount = SwapiDataActionsEnum.SET_STARSHIPS_TOTAL_COUNT;
+export const setPeopleTotalCount = SwapiDataActionsEnum.SET_PEOPLE_TOTAL_COUNT;
 
 export interface SetSwapiStarshipsDataAction {
-    type: SwapiActionsEnum.SET_STARSHIPS_DATA;
+    type: SwapiDataActionsEnum.SET_STARSHIPS_DATA;
     payload: ISwapiStarship[];
 }
 
 export interface SetSwapiPeopleDataAction {
-    type: typeof SwapiActionsEnum.SET_PEOPLE_DATA;
+    type: typeof SwapiDataActionsEnum.SET_PEOPLE_DATA;
     payload: ISwapiPeople[];
 }
 
 export interface SetStarshipIsLoadingAction {
-    type:  SwapiActionsEnum.SET_STARSHIPS_LOADING;
+    type:  SwapiDataActionsEnum.SET_STARSHIPS_LOADING;
     payload: boolean;
 }
 
 export interface SetPeopleIsLoadingAction {
-    type:  SwapiActionsEnum.SET_PEOPLE_LOADING;
+    type:  SwapiDataActionsEnum.SET_PEOPLE_LOADING;
     payload: boolean;
 }
 
 export interface SetStarshipsErrorAction {
-    type:  SwapiActionsEnum.SET_STARSHIPS_ERROR;
+    type:  SwapiDataActionsEnum.SET_STARSHIPS_ERROR;
     payload: string;
 }
 
 export interface SetPeopleErrorAction {
-    type:  SwapiActionsEnum.SET_PEOPLE_ERROR;
+    type:  SwapiDataActionsEnum.SET_PEOPLE_ERROR;
     payload: string;
 }
 
 export interface SetSwapiStarshipsTotalCountAction {
-    type: SwapiActionsEnum.SET_STARSHIPS_TOTAL_COUNT;
+    type: SwapiDataActionsEnum.SET_STARSHIPS_TOTAL_COUNT;
     payload: number;
 }
 
 export interface SetSwapiPeopleTotalCountAction {
-    type: SwapiActionsEnum.SET_PEOPLE_TOTAL_COUNT;
+    type: SwapiDataActionsEnum.SET_PEOPLE_TOTAL_COUNT;
     payload: number;
 }
 

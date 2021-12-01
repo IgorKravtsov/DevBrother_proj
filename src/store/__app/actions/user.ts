@@ -1,4 +1,4 @@
-import {UserDTO} from "../../interfaces/userDTO";
+import {UserDTO} from "../../../interfaces/userDTO";
 import {setUserData, SetUserDataAction} from "../types/user";
 
 export const userActionCreators = {

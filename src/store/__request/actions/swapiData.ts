@@ -16,10 +16,10 @@ import {
     SetSwapiStarshipsDataAction,
     SetSwapiStarshipsTotalCountAction,
 } from "../types/swapiData";
-import {ISwapiPeople} from "../../interfaces/swapi-response/IPeopleResponse";
-import {ISwapiStarship} from "../../interfaces/swapi-response/IStarshipResponse";
-import {AppDispatch} from "../index";
-import {SwapiService} from "../../services/swapi-service";
+import {ISwapiPeople} from "../../../interfaces/swapi-response/IPeopleResponse";
+import {ISwapiStarship} from "../../../interfaces/swapi-response/IStarshipResponse";
+import {AppDispatch} from "../../index";
+import {SwapiService} from "../../../services/swapi-service";
 
 
 export const swapiActionCreators = {
@@ -43,7 +43,7 @@ export const swapiActionCreators = {
             dispatch(swapiActionCreators.setSwapiStarshipsData(res.data.results));
             dispatch(swapiActionCreators.setStarshipsTotalCount(res.data.count));
         } catch (e: any) {
-            dispatch(swapiActionCreators.setStarshipsError(e.message));
+            dispatch(swapiActionCreators.setStarshipsError("Произошла ошибка при загрузке данных"));
         } finally {
             dispatch(swapiActionCreators.setStarshipsLoading(false));
         }
@@ -55,7 +55,7 @@ export const swapiActionCreators = {
             dispatch(swapiActionCreators.setSwapiPeopleData(res.data.results));
             dispatch(swapiActionCreators.setPeopleTotalCount(res.data.count));
         } catch (e: any) {
-            dispatch(swapiActionCreators.setPeopleError(e.message));
+            dispatch(swapiActionCreators.setPeopleError("Произошла ошибка при загрузке данных"));
         } finally {
             dispatch(swapiActionCreators.setPeopleLoading(false));
         }

@@ -19,8 +19,7 @@ const ProductInfoHeader:FC<ProductInfoHeaderProps> = ({setView, nowView}) => {
     }
 
     return (
-        <header className={styles.header}>
-            <p className={styles.back_wrapper}><img src={backArrow} alt="BACK" onClick={back} className={styles.back}/></p>
+        <div className={styles.header}>
             <div className={styles.changeViewBlock}>
                 <p><img
                     onClick={() => setView(LocalstorageValue.ProductCardView)}
@@ -35,7 +34,7 @@ const ProductInfoHeader:FC<ProductInfoHeaderProps> = ({setView, nowView}) => {
                     alt="list"
                 /></p>
             </div>
-        </header>
+        </div>
     );
 };
 

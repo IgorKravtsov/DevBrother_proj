@@ -1,7 +1,8 @@
+import cartReducer from "./cart";
 import userReducer from "./user";
-import swapiReducer from "./swapiData";
 
 export {
+    cartReducer,
     userReducer,
-    swapiReducer,
+
 }

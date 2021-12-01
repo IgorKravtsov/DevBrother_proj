@@ -15,7 +15,8 @@ export enum RouteNames {
     MAIN='/',
     LOGIN='/login',
     REGISTER='/register',
-    PRODUCTS='/products'
+    PRODUCTS='/products',
+    ERROR='/error',
 }
 
 

@@ -1,4 +1,4 @@
-import {UserDTO} from "../../interfaces/userDTO";
+import {UserDTO} from "../../../interfaces/userDTO";
 
 export interface UserState {
     userData: UserDTO;

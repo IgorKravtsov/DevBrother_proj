@@ -20,3 +20,8 @@
     filter: brightness(1.03);
   }
 }
+
+.outLine {
+  background: transparent;
+  border: 1px var(--main-front-color) solid;
+}

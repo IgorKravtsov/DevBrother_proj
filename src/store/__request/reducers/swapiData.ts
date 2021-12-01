@@ -1,7 +1,7 @@
 import {
-    setPeopleData,
+    setPeopleData, setPeopleError,
     setPeopleLoading, setPeopleTotalCount,
-    setStarshipsData,
+    setStarshipsData, setStarshipsError,
     setStarshipsLoading, setStarshipsTotalCount,
     SwapiAction,
     SwapiDataState
@@ -25,20 +25,22 @@ const initialState: SwapiDataState = {
 export default function swapiReducer(state= initialState, action: SwapiAction): SwapiDataState {
     switch (action.type) {
         case setStarshipsData:
-            // console.log("setStarshipsData.....", state)
             return { ...state, starships: { ...state.starships, data: action.payload, isLoading: false, error: '' }, }
 
         case setPeopleData:
-            // console.log("setPeopleData.....", state)
             return { ...state, people: { ...state.people, data: action.payload, isLoading: false, error: '' }, }
 
         case setStarshipsLoading:
-            // console.log("setStarshipsLoading.....", state)
-            return { ...state, starships: { ...state.starships, isLoading: action.payload, error: '' }, }
+            return { ...state, starships: { ...state.starships, isLoading: action.payload }, }
 
         case setPeopleLoading:
-            // console.log("setPeopleLoading.....", state)
-            return { ...state, people: { ...state.people, isLoading: action.payload, error: '' }, }
+            return { ...state, people: { ...state.people, isLoading: action.payload }, }
+
+        case setStarshipsError:
+            return { ...state, starships: { ...state.starships, error: action.payload }, }
+
+        case setPeopleError:
+            return { ...state, people: { ...state.people, error: action.payload }, }
 
         case setStarshipsTotalCount:
             return { ...state, starships: { ...state.starships, totalCount: action.payload }, }
