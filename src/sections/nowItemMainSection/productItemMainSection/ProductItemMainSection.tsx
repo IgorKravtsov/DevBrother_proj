@@ -42,10 +42,11 @@ const ProductItemMainSection:FC<PeopleItemMainSectionProps> = (
                 <img className={styles.img} src={img.src} alt={img.alt}/>
             </p>
             <h2 className={styles.title}>{data.name}</h2>
-
-            {renderItems().map((block,index) => <ul
-                className={styles.block}
-                key={index + Date.now()}>{block}</ul>)}
+            <ul className={styles.mainList}>
+                {renderItems().map((block,index) => <li><ul
+                    className={styles.block}
+                    key={index + Date.now()}>{block}</ul></li>)}
+            </ul>
         </>
     );
 };
