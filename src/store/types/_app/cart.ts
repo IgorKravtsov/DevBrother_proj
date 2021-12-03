@@ -25,12 +25,12 @@ export interface AddToCartPeopleAction {
     payload: ISwapiPeople;
 }
 
-export interface setStarshipsFromLocalstorageToRedux {
+export interface setStarshipsFromLocalstorageToReduxAction {
     type: CartAction.SET_STARSHIPS_FROM_LOCALSTORAGE_TO_CART;
     payload: ISwapiStarship[];
 }
 
-export interface setPeopleFromLocalstorageToRedux {
+export interface setPeopleFromLocalstorageToReduxAction {
     type: CartAction.SET_PEOPLE_FROM_LOCALSTORAGE_TO_CART;
     payload: ISwapiPeople[];
 }
@@ -39,5 +39,5 @@ export interface setPeopleFromLocalstorageToRedux {
 export type CartActionType =
     AddToCartStarshipAction |
     AddToCartPeopleAction |
-    setStarshipsFromLocalstorageToRedux |
-    setPeopleFromLocalstorageToRedux;
+    setStarshipsFromLocalstorageToReduxAction |
+    setPeopleFromLocalstorageToReduxAction;

@@ -7,6 +7,7 @@ import PanelCartPanel from "../panelCartCount/PanelCartPanel";
 import {useActions} from "../../hooks/useActions";
 import * as util from "../../util";
 import {LocalstorageKey} from "../../types/LocalstorageKey";
+import {setPeopleFromLocalstorageToRedux, setStarshipsFromLocalstorageToRedux} from "../../store/actions/_app/cart";
 
 export interface HeaderProps {
 
@@ -16,7 +17,7 @@ const Header:FC<HeaderProps> = (): ReactElement => {
     const navigate = useNavigate();
     const [isVisible, setIsVisible] = useState(false);
 
-    const {setPeopleFromLocalstorageToRedux, setStarshipsFromLocalstorageToRedux} = useActions();
+    // const {setPeopleFromLocalstorageToRedux, setStarshipsFromLocalstorageToRedux} = useActions();
 
     useEffect(() => {
         saveCartFromLocalstorageToRedux();
