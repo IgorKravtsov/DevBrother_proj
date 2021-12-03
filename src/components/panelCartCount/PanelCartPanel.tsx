@@ -1,13 +1,14 @@
 import React, {FC} from 'react';
 import styles from './panelCartCount.module.scss';
 import {useTypedSelector} from "../../hooks/useTypedSelector";
+import {useSelector} from "react-redux";
 
 export interface PanelCartPanelProps {
     isVisible: boolean
 }
 
 const PanelCartPanel:FC<PanelCartPanelProps> = ({isVisible}) => {
-    const {people, starships} = useTypedSelector(state => state.cartReducer);
+    const {people, starships} = useTypedSelector(state => state.app.cart);
 
     return (
         <ul className={[styles.wrapper, isVisible ? styles.wrapper_active : ''].join(' ')}>

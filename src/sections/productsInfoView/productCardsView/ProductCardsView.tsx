@@ -7,7 +7,7 @@ import * as util from '../../../util';
 import ProductCardsItem from "./productCardsItem/ProductCardsItem";
 
 export interface ProductCardsViewProps {
-    data: ISwapiPeople[] | ISwapiStarship[];
+    data?: ISwapiPeople[] | ISwapiStarship[];
     images: IProductImage[];
     type: 'starships' | 'people';
     test: string;
@@ -22,7 +22,7 @@ const ProductCardsView:FC<ProductCardsViewProps> = (
 
     return (
         <ul className={styles.wrapper}>
-            {data.map((product, index) => <ProductCardsItem
+            {data && data.map((product, index) => <ProductCardsItem
                 key={product.url} 
                 type={type} 
                 image={util.getImageByIndex(images, index)}

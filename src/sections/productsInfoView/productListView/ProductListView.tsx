@@ -8,7 +8,7 @@ import * as util from '../../../util';
 
 
 export interface ProductListViewProps {
-    data: ISwapiPeople[] | ISwapiStarship[];
+    data?: ISwapiPeople[] | ISwapiStarship[];
     images: IProductImage[];
     type: 'starships' | 'people';
 }
@@ -17,7 +17,7 @@ const ProductListView:FC<ProductListViewProps> = ({data,images, type}) => {
 
     return (
         <ul className={styles.wrapper}>
-            {data.map((product,index) => <ProductListItem
+            {data && data.map((product,index) => <ProductListItem
                 key={product.url}
                 type={type}
                 image={util.getImageByIndex(images, index)}

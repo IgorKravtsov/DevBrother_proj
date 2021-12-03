@@ -6,7 +6,7 @@ import {ISwapiStarship} from "../../../interfaces/swapi-response/IStarshipRespon
 
 export interface PeopleItemMainSectionProps {
     img: IProductImage;
-    data: ISwapiPeople | ISwapiStarship;
+    data?: ISwapiPeople | ISwapiStarship;
 }
 
 const ProductItemMainSection:FC<PeopleItemMainSectionProps> = (
@@ -41,7 +41,7 @@ const ProductItemMainSection:FC<PeopleItemMainSectionProps> = (
             <p className={styles.img_wrapper}>
                 <img className={styles.img} src={img.src} alt={img.alt}/>
             </p>
-            <h2 className={styles.title}>{data.name}</h2>
+            <h2 className={styles.title}>{data?.name}</h2>
             <ul className={styles.mainList}>
                 {renderItems().map((block,index) => <li><ul
                     className={styles.block}

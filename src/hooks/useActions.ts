@@ -1,7 +1,7 @@
 import {useDispatch} from "react-redux";
 import {bindActionCreators} from "redux";
-import {cartActionCreators, userActionCreators} from '../store/__app/actions';
-import {swapiActionCreators, swapiNowItemActionCreators} from '../store/__request/actions';
+import {cartActionCreators, userActionCreators} from '../OLD DATA/_app/actions';
+import {swapiActionCreators, swapiNowItemActionCreators} from '../OLD DATA/_request/actions';
 
 export const useActions = () => {
     const actionCreatorsToBind = {

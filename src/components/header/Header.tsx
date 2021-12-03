@@ -1,7 +1,6 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {FC, ReactElement, useEffect, useState} from 'react';
 import styles from './header.module.scss';
 import backArrow from './img/backArrow.svg';
-import backArrowDisabled from './img/backArrow_disabled.svg';
 import cart from './img/cart.svg';
 import {useNavigate} from "react-router-dom";
 import PanelCartPanel from "../panelCartCount/PanelCartPanel";
@@ -13,7 +12,7 @@ export interface HeaderProps {
 
 }
 
-const Header:FC<HeaderProps> = () => {
+const Header:FC<HeaderProps> = (): ReactElement => {
     const navigate = useNavigate();
     const [isVisible, setIsVisible] = useState(false);
 
@@ -26,8 +25,9 @@ const Header:FC<HeaderProps> = () => {
     const saveCartFromLocalstorageToRedux = () => {
         const people = util.getCartFromLocalstorage(LocalstorageKey.CartPeople),
             starships = util.getCartFromLocalstorage(LocalstorageKey.CartStarships);
-        setPeopleFromLocalstorageToRedux(people);
-        setStarshipsFromLocalstorageToRedux(starships);
+
+        people.length > 0 && setPeopleFromLocalstorageToRedux(people);
+        starships.length > 0 && setStarshipsFromLocalstorageToRedux(starships);
     }
 
     const switchVisible = (bool: boolean) => {
