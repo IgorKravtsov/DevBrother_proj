@@ -9,6 +9,7 @@ import {useTypedSelector} from "../../hooks/useTypedSelector";
 import {UserDTO} from "../../interfaces/userDTO";
 import Error from "../../components/error/Error";
 import {useActions} from "../../hooks/useActions";
+import * as util from '../../util';
 
 export interface LoginSectionProps {
     config: IFormConfig[];
@@ -20,7 +21,8 @@ const LoginSection:FC<LoginSectionProps> = ({config}): ReactElement => {
     const [inputs, setInputs] = useState<IInputConfigs[]>([]);
 
     const navigate = useNavigate();
-    const {userData} = useTypedSelector(state => state.userReducer);
+    // const {userData} = useTypedSelector(state => state.userReducer);
+    const {userData} = useTypedSelector(state => state.app.user);
     const {setUserData} = useActions();
 
     useEffect(() => {
@@ -37,13 +39,13 @@ const LoginSection:FC<LoginSectionProps> = ({config}): ReactElement => {
     }, [])
 
     useEffect(() => {
-        if(isReduxStorageHasData() && inputs.length > 0) {
+        if(util.isObjectNotEmpty(userData!, 'login') && inputs.length > 0) {
             checkInputData();
         }
     }, [inputs])
 
     const isReduxStorageHasData = () => {
-        return Object.keys(userData).includes("login");
+        return Object.keys(userData!).includes("login");
     }
 
     const checkInputData = () => {
@@ -60,7 +62,7 @@ const LoginSection:FC<LoginSectionProps> = ({config}): ReactElement => {
                         break;
                 }
             });
-            checkCreditsAndGoToAnotherPage(userDataFromInputs, userData);
+            checkCreditsAndGoToAnotherPage(userDataFromInputs, userData!);
         }
     }
 

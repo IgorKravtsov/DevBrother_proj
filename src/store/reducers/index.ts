@@ -1,7 +1,2 @@
-import userReducer from "./user";
-import swapiReducer from "./swapiData";
-
-export {
-    userReducer,
-    swapiReducer,
-}
+export * as request from './_request';
+export * as app from './_app';

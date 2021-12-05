@@ -4,9 +4,9 @@ import Form from "../form/Form";
 import Input from "../input/Input";
 import Button from "../button/Button";
 import {IInputConfigs} from "../../types/IInputConfigs";
-import * as util from "../../util/util";
+import * as util from "../../util";
 import styles from './formBuilder.module.scss'
-import {checkTheSameValue} from "../../util/util";
+import {checkTheSameValue} from "../../util";
 
 export  interface FormBuilderProps {
     formConfig: IFormConfig[];

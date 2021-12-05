@@ -2,20 +2,32 @@ import React, {FC} from 'react';
 import styles from './productCardsView.module.scss';
 import {ISwapiPeople} from "../../../interfaces/swapi-response/IPeopleResponse";
 import {ISwapiStarship} from "../../../interfaces/swapi-response/IStarshipResponse";
-import {IProductImage} from "../../../pages/productInfoPage/assets/productImages";
-import * as util from '../../../util/util';
+import {IProductImage} from "../../../pages/assets/productImages";
+import * as util from '../../../util';
 import ProductCardsItem from "./productCardsItem/ProductCardsItem";
 
 export interface ProductCardsViewProps {
-    data: ISwapiPeople[] | ISwapiStarship[];
+    data?: ISwapiPeople[] | ISwapiStarship[];
     images: IProductImage[];
     type: 'starships' | 'people';
+    test: string;
 }
 
-const ProductCardsView:FC<ProductCardsViewProps> = ({data, images, type}) => {
+const ProductCardsView:FC<ProductCardsViewProps> = (
+    {
+        data,
+        type,
+        images}) => {
+
+
     return (
         <ul className={styles.wrapper}>
-            {data.map(product => <ProductCardsItem key={product.url} type={type} image={util.getRandomImage(images)}  product={product}/>)}
+            {data && data.map((product, index) => <ProductCardsItem
+                key={product.url} 
+                type={type} 
+                image={util.getImageByIndex(images, index)}
+                product={product}
+            />)}
         </ul>
     );
 };

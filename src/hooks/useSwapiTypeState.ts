@@ -16,7 +16,7 @@ export const useSwapiTypeState = (type: string, product: ISwapiStarship | ISwapi
     }, [])
 
     return {
-        people: itemsPeople,
-        starships: itemsStarships
+        people: itemsPeople!,
+        starships: itemsStarships!
     }
 }

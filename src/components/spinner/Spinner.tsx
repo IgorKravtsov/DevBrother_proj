@@ -8,7 +8,7 @@ export interface SpinnerProps {
 
 const Spinner:FC<SpinnerProps> = ({classes}) => {
     return (
-        <h1 className={classes}>
+        <h1 className={[styles.spinner, classes].join(' ')}>
            LOADING.......
         </h1>
     );

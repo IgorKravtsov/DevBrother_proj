@@ -1,7 +1,8 @@
 :root {
-  --main-back-color-products: #282c34;
-  --main-text-color-products: #FFF;
-  --main-front-color-products: #708090;
+  --main-back-color: #282c34;
+  --main-text-color: #FFF;
+  --main-front-color: #708090;
+  --additional-back-color: #704090;
 }
 
 body {
