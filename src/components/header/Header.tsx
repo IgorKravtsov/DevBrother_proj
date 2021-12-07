@@ -7,7 +7,12 @@ import PanelCartPanel from "../panelCartCount/PanelCartPanel";
 import {useActions} from "../../hooks/useActions";
 import * as util from "../../util";
 import {LocalstorageKey} from "../../types/LocalstorageKey";
-import {setPeopleFromLocalstorageToRedux, setStarshipsFromLocalstorageToRedux} from "../../store/actions/_app/cart";
+// import {setPeopleFromLocalstorageToRedux, setStarshipsFromLocalstorageToRedux} from "../../store/actions/_app/cart";
+import {setPeopleFromLocalstorageToCart, setStarshipsFromLocalstorageToCart} from '../../store/slices/cartSlice';
+import {useDispatch} from "react-redux";
+import Portal from "../portal/Portal";
+import CartSection from "../../sections/cartSection/CartSection";
+import {useTypedSelector} from "../../hooks/useTypedSelector";
 
 export interface HeaderProps {
 
@@ -16,8 +21,13 @@ export interface HeaderProps {
 const Header:FC<HeaderProps> = (): ReactElement => {
     const navigate = useNavigate();
     const [isVisible, setIsVisible] = useState(false);
+    const [isPortalVisible, setIsPortalVisible] = useState(false);
 
     // const {setPeopleFromLocalstorageToRedux, setStarshipsFromLocalstorageToRedux} = useActions();
+
+    const {people, starships} = useTypedSelector(state => state.cart);
+
+    const dispatch = useDispatch();
 
     useEffect(() => {
         saveCartFromLocalstorageToRedux();
@@ -27,9 +37,13 @@ const Header:FC<HeaderProps> = (): ReactElement => {
         const people = util.getCartFromLocalstorage(LocalstorageKey.CartPeople),
             starships = util.getCartFromLocalstorage(LocalstorageKey.CartStarships);
 
-        people.length > 0 && setPeopleFromLocalstorageToRedux(people);
-        starships.length > 0 && setStarshipsFromLocalstorageToRedux(starships);
+        people.length > 0 && dispatch(setPeopleFromLocalstorageToCart(people));
+        starships.length > 0 && dispatch(setStarshipsFromLocalstorageToCart(starships));
     }
+
+    useEffect(() => {
+        util.saveCartToLocalstorage(people, starships)
+    }, [people, starships])
 
     const switchVisible = (bool: boolean) => {
         setIsVisible(bool);
@@ -42,11 +56,15 @@ const Header:FC<HeaderProps> = (): ReactElement => {
             </p>
             <p className={styles.img_wrapper}>
                 <img
+                    onClick={() => setIsPortalVisible(true)}
                     onMouseEnter={() => switchVisible(true)}
                     onMouseLeave={() => switchVisible(false)}
                     className={styles.img} src={cart} alt="cart"/>
             </p>
             <PanelCartPanel isVisible={isVisible}/>
+            <Portal>
+                {isPortalVisible && <CartSection closeFunc={() => setIsPortalVisible(false)}/>}
+            </Portal>
         </header>
     );
 };

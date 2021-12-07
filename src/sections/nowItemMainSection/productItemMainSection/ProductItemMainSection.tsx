@@ -43,9 +43,10 @@ const ProductItemMainSection:FC<PeopleItemMainSectionProps> = (
             </p>
             <h2 className={styles.title}>{data?.name}</h2>
             <ul className={styles.mainList}>
-                {renderItems().map((block,index) => <li><ul
-                    className={styles.block}
-                    key={index + Date.now()}>{block}</ul></li>)}
+                {renderItems().map((block,index) => <li key={index + Date.now()}>
+                    <ul
+                        className={styles.block}
+                    >{block}</ul></li>)}
             </ul>
         </>
     );

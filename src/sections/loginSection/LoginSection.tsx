@@ -21,8 +21,7 @@ const LoginSection:FC<LoginSectionProps> = ({config}): ReactElement => {
     const [inputs, setInputs] = useState<IInputConfigs[]>([]);
 
     const navigate = useNavigate();
-    // const {userData} = useTypedSelector(state => state.userReducer);
-    const {userData} = useTypedSelector(state => state.app.user);
+    const {userData} = useTypedSelector(state => state.user);
     const {setUserData} = useActions();
 
     useEffect(() => {

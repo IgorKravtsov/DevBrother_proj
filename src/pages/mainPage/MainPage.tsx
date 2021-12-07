@@ -1,9 +1,6 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {Link} from "react-router-dom";
 import {RouteNames} from "../../routes";
-import * as util from "../../util";
-import {LocalstorageKey} from "../../types/LocalstorageKey";
-import {useActions} from "../../hooks/useActions";
 import styles from './mainPage.module.scss';
 
 const MainPage = () => {
@@ -15,6 +12,9 @@ const MainPage = () => {
             </Link>
             <Link className={styles.link} to={RouteNames.PRODUCTS}>
                 <h5 className={styles.text}>PRODUCTS</h5>
+            </Link>
+            <Link className={styles.link} to={RouteNames.CART}>
+                <h5 className={styles.text}>Cart</h5>
             </Link>
         </main>
     );

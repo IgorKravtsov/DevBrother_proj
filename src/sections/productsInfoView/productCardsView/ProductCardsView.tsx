@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, {FC, memo} from 'react';
 import styles from './productCardsView.module.scss';
 import {ISwapiPeople} from "../../../interfaces/swapi-response/IPeopleResponse";
 import {ISwapiStarship} from "../../../interfaces/swapi-response/IStarshipResponse";
@@ -13,7 +13,7 @@ export interface ProductCardsViewProps {
     test: string;
 }
 
-const ProductCardsView:FC<ProductCardsViewProps> = (
+const ProductCardsView:FC<ProductCardsViewProps> = memo((
     {
         data,
         type,
@@ -25,11 +25,11 @@ const ProductCardsView:FC<ProductCardsViewProps> = (
             {data && data.map((product, index) => <ProductCardsItem
                 key={product.url} 
                 type={type} 
-                image={util.getImageByIndex(images, index)}
+                image={util.getRandomImage(images)}
                 product={product}
             />)}
         </ul>
     );
-};
+});
 
 export default ProductCardsView;

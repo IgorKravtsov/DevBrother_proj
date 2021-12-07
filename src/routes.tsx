@@ -17,10 +17,12 @@ export enum RouteNames {
     REGISTER='/register',
     PRODUCTS='/products',
     ERROR='/error',
+    CART='/cart',
+
 }
 
 
-// export const routes: IRoute[] =  [
-//     { path: RouteNames.LOGIN, element: {<LoginPage/>} },
-//     { path: RouteNames.REGISTER, element: RegisterPage },
-// ]
+export const routes =  [
+    { path: RouteNames.LOGIN, element: 'LoginPage' },
+    { path: RouteNames.REGISTER, element: 'RegisterPage' },
+]

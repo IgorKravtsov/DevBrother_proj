@@ -8,11 +8,13 @@ import StarshipsItemMainSection from "../../sections/nowItemMainSection/starship
 import {peopleImages, starshipImages} from "../assets/productImages";
 import ProductItemMainSection from "../../sections/nowItemMainSection/productItemMainSection/ProductItemMainSection";
 import Spinner from "../../components/spinner/Spinner";
-import {nowPerson} from "../../store/actions/_request/nowPerson";
+// import {nowPerson} from "../../store/actions/_request/nowPerson";
 import {StateStatus} from "../../interfaces/StateStatus";
-import {nowStarship} from "../../store/actions/_request/nowStarship";
+// import {nowStarship} from "../../store/actions/_request/nowStarship";
 import {useDispatch} from "react-redux";
 import {useAppDispatch} from "../../hooks/useAppDispatch";
+import {useGetOneStarshipQuery} from "../../api/starshipsSlice";
+import {useGetOnePersonQuery} from "../../api/peopleSlice";
 
 export interface ProductItemPageProps {
 
@@ -21,29 +23,44 @@ export interface ProductItemPageProps {
 const ProductItemPage:FC<ProductItemPageProps> = (): ReactElement => {
 
     // const {nowPerson, nowStarship} = useTypedSelector(state => state.swapiNowItemReducer);
-    const {getOneStarship} = useTypedSelector(state => state.request.nowStarship);
-    const {getOnePerson} = useTypedSelector(state => state.request.nowPerson);
+    // const {getOneStarship} = useTypedSelector(state => state.request.nowStarship);
+    // const {getOnePerson} = useTypedSelector(state => state.request.nowPerson);
+
+
+
     const dispatch = useDispatch();
     // const {getNowPersonItem, getNowStarshipItem} = useActions();
     const {id, type} = useParams();
     const isStarships = type === 'starships';
 
-    useEffect(() => {
-        if(isStarships) {
-            id && dispatch(nowStarship.get(parseInt(id)))
-        } else {
-            id && dispatch(nowPerson.get(parseInt(id)));
-        }
-    }, [])
+    const {
+        data: nowStarship,
+        isLoading: nowStarshipIsLoading,
+        isError: nowStarshipIsError,
+    } = useGetOneStarshipQuery(isStarships ? +id! : null);
+
+    const {
+        data: nowPerson,
+        isLoading: nowPersonIsLoading,
+        isError: nowPersonIsError,
+    } = useGetOnePersonQuery(!isStarships ? +id! : null);
+
+    // useEffect(() => {
+    //     if(isStarships) {
+    //         id && dispatch(nowStarship.get(parseInt(id)))
+    //     } else {
+    //         id && dispatch(nowPerson.get(parseInt(id)));
+    //     }
+    // }, [])
 
 
     return (
         <main className={styles.wrapper}>
-            {getOnePerson.status === StateStatus.PENDING ||
-            getOneStarship.status === StateStatus.PENDING ? <Spinner/> :
+            {nowPersonIsLoading ||
+            nowStarshipIsLoading ? <Spinner/> :
                 <ProductItemMainSection
                     img={util.getRandomImage(isStarships ? starshipImages : peopleImages)}
-                    data={isStarships ? getOneStarship.data! : getOnePerson.data!}
+                    data={isStarships ? nowStarship : nowPerson}
                 />}
         </main>
     );

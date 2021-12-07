@@ -5,8 +5,9 @@ import {ISwapiPeople} from "../../../../interfaces/swapi-response/IPeopleRespons
 import {IProductImage} from "../../../../pages/assets/productImages";
 import {Link} from "react-router-dom";
 import Button from "../../../../components/button/Button";
-import {useActions} from "../../../../hooks/useActions";
 import * as util from "../../../../util";
+import {addStarshipToCart, addPersonToCart} from '../../../../store/slices/cartSlice';
+import {useDispatch} from "react-redux";
 
 
 export interface ProductListItemProps {
@@ -18,10 +19,10 @@ export interface ProductListItemProps {
 const ProductListItem:FC<ProductListItemProps> = ({product, image,type}) => {
     const [itemPeople, setItemPeople] = useState<ISwapiPeople>();
     const [itemStarships, setItemStarships] = useState<ISwapiStarship>();
-    const {addToCartStarship, addToCartPeople} = useActions();
 
     const isStarships = type === 'starships';
     const id = util.getId(product);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         if(type === 'starships') {
@@ -33,8 +34,8 @@ const ProductListItem:FC<ProductListItemProps> = ({product, image,type}) => {
     }, [])
 
     const addToCart = () => {
-            isStarships ? itemStarships && addToCartStarship(itemStarships) :
-                itemPeople && addToCartPeople(itemPeople);
+            isStarships ? itemStarships && dispatch(addStarshipToCart(itemStarships)) :
+                itemPeople && dispatch(addPersonToCart(itemPeople));
     }
 
     return (

@@ -8,7 +8,7 @@ export interface PanelCartPanelProps {
 }
 
 const PanelCartPanel:FC<PanelCartPanelProps> = ({isVisible}) => {
-    const {people, starships} = useTypedSelector(state => state.app.cart);
+    const {people, starships} = useTypedSelector(state => state.cart);
 
     return (
         <ul className={[styles.wrapper, isVisible ? styles.wrapper_active : ''].join(' ')}>

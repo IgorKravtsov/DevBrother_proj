@@ -3,6 +3,7 @@
 
 export const getCartFromLocalstorage = (key: string) => {
     const data = localStorage.getItem(key);
+    console.log("DATA", data)
     // if(!data) {
     //     localStorage.setItem(key, JSON.stringify([]));
     //     getCartFromLocalstorage(key);

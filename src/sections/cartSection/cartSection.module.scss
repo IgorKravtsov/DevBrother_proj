@@ -1,0 +1,11 @@
+.container {
+  width: 95%;
+  min-height: 320vh;
+  margin: 0 auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  background-color: var(--main-back-color);
+  padding: 30px;
+}

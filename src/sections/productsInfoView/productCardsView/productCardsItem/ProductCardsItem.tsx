@@ -9,8 +9,8 @@ import Button from "../../../../components/button/Button";
 import {useActions} from "../../../../hooks/useActions";
 import {Link} from "react-router-dom";
 import * as util from '../../../../util';
-import {useTypedSelector} from "../../../../hooks/useTypedSelector";
-import {getId} from "../../../../util/getId";
+import {addPersonToCart, addStarshipToCart} from '../../../../store/slices/cartSlice'
+import {useDispatch} from "react-redux";
 
 export interface ProductCardsItemProps {
     product: ISwapiStarship | ISwapiPeople;
@@ -26,11 +26,12 @@ const ProductCardsItem:FC<ProductCardsItemProps> = (
     }): ReactElement => {
 
     const item = useSwapiTypeState(type, product);
-    const {addToCartStarship, addToCartPeople} = useActions();
+    // const {addToCartStarship, addToCartPeople} = useActions();
     // const {starships, people} = useTypedSelector(state => state.cartReducer);
 
     const isStarships = type === 'starships';
     const id = util.getId(product);
+    const dispatch = useDispatch();
 
 
     // useEffect(() => {
@@ -61,7 +62,7 @@ const ProductCardsItem:FC<ProductCardsItemProps> = (
                 </>}
             <Button outlineBtn
                     onClick={() => isStarships ?
-                        addToCartStarship(item.starships) : addToCartPeople(item.people)}
+                        dispatch(addStarshipToCart(item.starships)) : dispatch(addPersonToCart(item.people))}
                     classes={styles.btn}>ADD</Button>
         </li>
     );

@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {FC, memo, useEffect, useState} from 'react';
 import styles from './productInfo.module.scss';
 import {useTypedSelector} from "../../hooks/useTypedSelector";
 import {useNavigate, useParams} from "react-router-dom";
@@ -12,40 +12,44 @@ import {useActions} from "../../hooks/useActions";
 import * as util from "../../util";
 import {RouteNames} from "../../routes";
 import Spinner from "../../components/spinner/Spinner";
-import {starships} from "../../store/actions/_request/starships";
-import {people} from "../../store/actions/_request/people";
 import {StateStatus} from "../../interfaces/StateStatus";
 import {useDispatch} from "react-redux";
+import {useGetPeopleQuery} from '../../api/peopleSlice'
+import {useGetStarshipsQuery} from "../../api/starshipsSlice";
 
 export interface ProductInfoPageProps {
 
 }
 
-const ProductInfoPage:FC<ProductInfoPageProps> = () => {
+const ProductInfoPage:FC<ProductInfoPageProps> = memo(() => {
     const [nowView, setNowView] = useState(localStorage.getItem(LocalstorageKey.ProductsView) || LocalstorageValue.ProductCardView);
 
-    const {getAllStarships} = useTypedSelector(state => state.request.starships);
-    const {getAllPeople} = useTypedSelector(state => state.request.people);
-    const {starships: starshipsCart, people: peopleCart} = useTypedSelector(state => state.app.cart);
-
     const {type} = useParams();
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
-
     const isStarships = type === 'starships';
-    useEffect(() => {
-        if(!getAllPeople.data && !getAllStarships.data) {
-            isStarships ? dispatch(starships.get()) : dispatch(people.get());
-        }
-        // saveCartFromLocalstorageToRedux();
-    }, [])
+
+    const {
+        data: people,
+        isError: peopleIsError,
+        isLoading: peopleIsLoading
+    } = useGetPeopleQuery(null);
+
+    const {
+        data: starships,
+        isError: starshipsIsError,
+        isLoading: starshipsIsLoading
+    } = useGetStarshipsQuery(null);
+
+    const {starships: starshipsCart, people: peopleCart} = useTypedSelector(state => state.cart);
+
+    const navigate = useNavigate();
+
 
     useEffect(() => {
-        const err = isStarships ? getAllStarships.error : getAllPeople.error;
+        const err = isStarships ? peopleIsError : starshipsIsError;
         if(err) {
             navigate(RouteNames.ERROR);
         }
-    }, [getAllPeople.error, getAllStarships.error])
+    }, [peopleIsError, starshipsIsError])
 
     useEffect(() => {
         util.saveCartToLocalstorage(peopleCart, starshipsCart)
@@ -61,24 +65,24 @@ const ProductInfoPage:FC<ProductInfoPageProps> = () => {
             <main className={styles.wrapper}>
             <ProductInfoHeader setView={changeView} nowView={nowView}/>
 
-                {getAllStarships.status === StateStatus.PENDING ||
-                getAllPeople.status === StateStatus.PENDING ? <Spinner/> : null}
+                {peopleIsLoading ||
+                starshipsIsLoading ? <Spinner/> : null}
 
                 {nowView === LocalstorageValue.ProductCardView ?
                     <ProductCardsView
                         test="test"
                         type={isStarships ? 'starships':'people'}
-                        data={isStarships ? getAllStarships.data?.items : getAllPeople.data?.items}
+                        data={isStarships ? starships?.results : people?.results}
                         images={isStarships ? starshipImages : peopleImages}
                     /> :
                     <ProductListView
                         type={isStarships ? 'starships':'people'}
-                        data={isStarships ? getAllStarships.data?.items : getAllPeople.data?.items}
+                        data={isStarships ? starships?.results : people?.results}
                         images={isStarships ? starshipImages : peopleImages}
                     />}
             </main>
         </>
     );
-};
+});
 
 export default ProductInfoPage;

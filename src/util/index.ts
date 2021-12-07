@@ -8,6 +8,7 @@ import {getCartFromLocalstorage} from "./getCartFromLocalstorage";
 import {getImageByIndex} from "./getImageByIndex";
 import {isObjectNotEmpty} from "./isObjectNotEmpty";
 import {getId} from "./getId";
+import {parseLocalstorageToMakeCart} from "./parseLocalstorageToMakeCart";
 
 export {
     checkMinLength,
@@ -20,5 +21,6 @@ export {
     getImageByIndex,
     isObjectNotEmpty,
     getId,
+    parseLocalstorageToMakeCart,
 
 }

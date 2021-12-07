@@ -2,9 +2,21 @@ import {ISwapiStarship} from "../../../interfaces/swapi-response/IStarshipRespon
 import {ISwapiPeople} from "../../../interfaces/swapi-response/IPeopleResponse";
 
 
+export interface CartProductStarship {
+    product: ISwapiStarship | null
+    count: number | null
+    id: number | null
+}
+
+export interface CartProductPeople {
+    product: ISwapiPeople | null
+    count: number | null
+    id: number | null
+}
+
 export interface CartState {
-    starships: ISwapiStarship[];
-    people: ISwapiPeople[];
+    starships: CartProductStarship[] | null;
+    people: CartProductPeople[] | null;
 }
 
 export enum CartAction {
