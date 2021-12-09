@@ -3,7 +3,7 @@ import styles from './productListView.module.scss';
 import {ISwapiPeople} from "../../../interfaces/swapi-response/IPeopleResponse";
 import {ISwapiStarship} from "../../../interfaces/swapi-response/IStarshipResponse";
 import ProductListItem from "./productListItem/ProductListItem";
-import {IProductImage} from "../../../pages/assets/productImages";
+import {IProductImage} from "../../../assets/productImages";
 import * as util from '../../../util';
 
 

@@ -1,14 +1,13 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {ISwapiStarship} from "../../interfaces/swapi-response/IStarshipResponse";
-import {CartProductStarship, CartState} from "../types/_app/cart";
-import {ISwapiPeople} from "../../interfaces/swapi-response/IPeopleResponse";
+import {CartProductPeople, CartProductStarship, CartState} from "../types/_app/cart";
+import {ICartPeople, ICartStarship} from "../../interfaces/ICartItem";
 
 
 
 
 const initialState: CartState = {
-    starships: null,
-    people: null
+    starships: [],
+    people: []
 
 }
 
@@ -17,33 +16,46 @@ const cartSlice = createSlice({
     initialState,
     reducers: {
 
-        addStarshipToCart: (state, action:PayloadAction<CartProductStarship>) => {
-            const starship = state.starships?.find((starship) => starship.id === action.payload.id);
-            starship?.count && starship.count++;
+        addStarshipToCart: (state, action:PayloadAction<ICartStarship>) => {
+            const starship = state.starships.find(starship => starship.id === action.payload.id);
+            if(!starship) {
+                state.starships.push({data: action.payload.data, id: action.payload.id, count: 1})
+            } else {
+                starship.count++
+            }
         },
-        // addPersonToCart: (state, action:PayloadAction<ISwapiPeople>) => {
-        //     state.people.push(action.payload)
-        // },
-        // setStarshipsFromLocalstorageToCart: (state, action:PayloadAction<ISwapiStarship[]>) => {
-        //     state.starships = action.payload
-        // },
-        // setPeopleFromLocalstorageToCart: (state, action:PayloadAction<ISwapiPeople[]>) => {
-        //     state.people = action.payload
-        // },
-        // minusPersonFromCart: (state, action:PayloadAction<ISwapiPeople>) => {
-        //     const idx = state.people.findIndex(person => person.name === action.payload.name);
-        //     state.people = [...state.people.slice(0, idx), ...state.people.slice(idx + 1, state.people.length)];
-        // },
-        // minusStarshipFromCart: (state, action:PayloadAction<ISwapiStarship>) => {
-        //     const idx = state.starships.findIndex(starship => starship.name === action.payload.name);
-        //     state.starships = [...state.starships.slice(0, idx), ...state.starships.slice(idx + 1, state.starships.length)];
-        // },
-        // deleteAllThesePeopleFromCart: (state, action:PayloadAction<ISwapiPeople>) => {
-        //     state.people = state.people.filter(person => person.name !== action.payload.name);
-        // },
-        // deleteAllTheseStarshipsFromCart: (state, action:PayloadAction<ISwapiStarship>) => {
-        //     state.starships = state.starships.filter(starship => starship.name !== action.payload.name);
-        // },
+        addPersonToCart: (state, action:PayloadAction<ICartPeople>) => {
+            const person = state.people.find(person => person.id === action.payload.id);
+            if(!person) {
+                state.people.push({data: action.payload.data, id: action.payload.id, count: 1})
+            } else {
+                person.count++
+            }
+        },
+        setStarshipsFromLocalstorageToCart: (state, action:PayloadAction<CartProductStarship[]>) => {
+            state.starships = action.payload
+        },
+        setPeopleFromLocalstorageToCart: (state, action:PayloadAction<CartProductPeople[]>) => {
+            state.people = action.payload
+        },
+        minusPersonFromCart: (state, action:PayloadAction<number>) => {
+            const person = state.people.find(person => person.id === action.payload);
+            if(person && --person.count < 1) {
+                state.people = state.people.filter(p => p.id !== person.id);
+            }
+        },
+        minusStarshipFromCart: (state, action:PayloadAction<number>) => {
+            const starship = state.starships.find(starship => starship.id === action.payload);
+            if(starship && --starship.count < 1) {
+                state.starships = state.starships.filter(s => s.id !== starship.id);
+            }
+        },
+        deleteAllThesePeopleFromCart: (state, action:PayloadAction<number>) => {
+            state.people = state.people.filter(person => person.id !== action.payload);
+        },
+        deleteAllTheseStarshipsFromCart: (state, action:PayloadAction<number>) => {
+            state.starships = state.starships.filter(starship => starship.id !== action.payload);
+        },
     }
 })
 
@@ -53,13 +65,13 @@ export default reducer;
 
 export const {
 
-    // setStarshipsFromLocalstorageToCart,
-    // setPeopleFromLocalstorageToCart,
+    setStarshipsFromLocalstorageToCart,
+    setPeopleFromLocalstorageToCart,
     addStarshipToCart,
-    // addPersonToCart,
-    // minusPersonFromCart,
-    // minusStarshipFromCart,
-    // deleteAllThesePeopleFromCart,
-    // deleteAllTheseStarshipsFromCart,
+    addPersonToCart,
+    minusPersonFromCart,
+    minusStarshipFromCart,
+    deleteAllThesePeopleFromCart,
+    deleteAllTheseStarshipsFromCart,
 
 } = actions;

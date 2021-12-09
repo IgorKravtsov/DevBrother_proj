@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import styles from './swapiImage.module.scss';
-import {peopleImages, starshipImages} from "../../pages/assets/productImages";
+import {peopleImages, starshipImages} from "../../assets/productImages";
 
 import * as util from '../../util';
 

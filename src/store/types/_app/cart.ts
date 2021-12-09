@@ -3,20 +3,20 @@ import {ISwapiPeople} from "../../../interfaces/swapi-response/IPeopleResponse";
 
 
 export interface CartProductStarship {
-    product: ISwapiStarship | null
-    count: number | null
-    id: number | null
+    data: ISwapiStarship | null
+    count: number
+    id: number
 }
 
 export interface CartProductPeople {
-    product: ISwapiPeople | null
-    count: number | null
-    id: number | null
+    data: ISwapiPeople | null
+    count: number
+    id: number
 }
 
 export interface CartState {
-    starships: CartProductStarship[] | null;
-    people: CartProductPeople[] | null;
+    starships: CartProductStarship[];
+    people: CartProductPeople[];
 }
 
 export enum CartAction {

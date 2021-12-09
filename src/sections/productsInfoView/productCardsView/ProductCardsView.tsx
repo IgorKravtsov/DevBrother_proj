@@ -2,7 +2,7 @@ import React, {FC, memo} from 'react';
 import styles from './productCardsView.module.scss';
 import {ISwapiPeople} from "../../../interfaces/swapi-response/IPeopleResponse";
 import {ISwapiStarship} from "../../../interfaces/swapi-response/IStarshipResponse";
-import {IProductImage} from "../../../pages/assets/productImages";
+import {IProductImage} from "../../../assets/productImages";
 import * as util from '../../../util';
 import ProductCardsItem from "./productCardsItem/ProductCardsItem";
 
@@ -10,7 +10,6 @@ export interface ProductCardsViewProps {
     data?: ISwapiPeople[] | ISwapiStarship[];
     images: IProductImage[];
     type: 'starships' | 'people';
-    test: string;
 }
 
 const ProductCardsView:FC<ProductCardsViewProps> = memo((

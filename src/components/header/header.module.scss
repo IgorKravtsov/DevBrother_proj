@@ -20,3 +20,25 @@
     margin: 0;
   }
 }
+
+.list {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.totalCount {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  background-color: var(--main-back-color);
+  border-radius: 100%;
+  color: var(--main-text-color);
+  font-size: 15px;
+  margin-left: 10px;
+  font-weight: 500;
+}

@@ -1,19 +1,20 @@
 import React, {FC, memo} from 'react';
 import CartHeader from "./header/CartHeader";
 import styles from './cartSection.module.scss';
-import CartBox from "./box/CartBox";
+import CartList from "./cartList/CartList";
 
 export interface CartSectionProps {
     closeFunc: Function;
+    isVisible: boolean;
 }
 
-const CartSection:FC<CartSectionProps> = memo(({closeFunc}) => {
+const CartSection:FC<CartSectionProps> = ({closeFunc, isVisible}) => {
     return (
-        <div className={styles.container}>
+        <main className={[styles.container, isVisible ? styles.visible : ''].join(' ')}>
             <CartHeader closeFunc={closeFunc}/>
-            <CartBox/>
-        </div>
+            <CartList/>
+        </main>
     );
-});
+};
 
 export default CartSection;

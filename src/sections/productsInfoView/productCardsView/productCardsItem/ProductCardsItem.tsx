@@ -1,8 +1,8 @@
-import React, {FC, ReactElement, useEffect} from 'react';
+import React, {FC, ReactElement, useEffect, useState} from 'react';
 import styles from './productCardsItem.module.scss';
 import {ISwapiStarship} from "../../../../interfaces/swapi-response/IStarshipResponse";
 import {ISwapiPeople} from "../../../../interfaces/swapi-response/IPeopleResponse";
-import {IProductImage} from "../../../../pages/assets/productImages";
+import {IProductImage} from "../../../../assets/productImages";
 import {useSwapiTypeState} from "../../../../hooks/useSwapiTypeState";
 import ProductCard from "../../../../components/productCard/ProductCard";
 import Button from "../../../../components/button/Button";
@@ -30,8 +30,10 @@ const ProductCardsItem:FC<ProductCardsItemProps> = (
     // const {starships, people} = useTypedSelector(state => state.cartReducer);
 
     const isStarships = type === 'starships';
-    const id = util.getId(product);
+    const itemId = util.getId(product);
     const dispatch = useDispatch();
+    const [isAdded, setIsAdded] = useState(false)
+
 
 
     // useEffect(() => {
@@ -41,11 +43,18 @@ const ProductCardsItem:FC<ProductCardsItemProps> = (
     // }, [starships, people])
     // console.log(product.url);
 
+    const addToCart = () => {
+        isStarships ?
+            dispatch(addStarshipToCart({data: item.starships, id: +itemId!})) :
+            dispatch(addPersonToCart({data: item.people, id: +itemId!}))
+        setIsAdded(true);
+        setTimeout(() => setIsAdded(false), 1000);
+    }
 
     return (
         <li className={styles.listItem}>
             <Link  className={styles.link}
-                   to={`/products/${type}/${id}`}
+                   to={`/products/${type}/${itemId}`}
                    // to={location => `${location.pathname}?sort=name`}
             />
             {isStarships ?
@@ -61,9 +70,8 @@ const ProductCardsItem:FC<ProductCardsItemProps> = (
                     </ProductCard>
                 </>}
             <Button outlineBtn
-                    onClick={() => isStarships ?
-                        dispatch(addStarshipToCart(item.starships)) : dispatch(addPersonToCart(item.people))}
-                    classes={styles.btn}>ADD</Button>
+                    onClick={addToCart}
+                    classes={[styles.btn, isAdded ? styles.btn_added : ''].join(' ')}>{isAdded ? 'ADDED' : 'ADD'}</Button>
         </li>
     );
 };

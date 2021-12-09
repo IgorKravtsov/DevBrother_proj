@@ -1,6 +1,6 @@
 import React, {FC, ReactElement} from 'react';
 import styles from './starshipsItemMainSection.module.scss';
-import {IProductImage} from "../../../pages/assets/productImages";
+import {IProductImage} from "../../../assets/productImages";
 import {ISwapiStarship} from "../../../interfaces/swapi-response/IStarshipResponse";
 
 export interface StarshipsItemMainSectionProps {

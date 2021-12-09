@@ -7,7 +7,7 @@ import {LocalstorageValue} from "../../types/LocalstorageValue";
 import ProductInfoHeader from "../../sections/productsInfoView/productInfoHeader/ProductInfoHeader";
 import ProductCardsView from "../../sections/productsInfoView/productCardsView/ProductCardsView";
 import ProductListView from "../../sections/productsInfoView/productListView/ProductListView";
-import {peopleImages, starshipImages} from "../assets/productImages";
+import {peopleImages, starshipImages} from "../../assets/productImages";
 import {useActions} from "../../hooks/useActions";
 import * as util from "../../util";
 import {RouteNames} from "../../routes";
@@ -16,6 +16,7 @@ import {StateStatus} from "../../interfaces/StateStatus";
 import {useDispatch} from "react-redux";
 import {useGetPeopleQuery} from '../../api/peopleSlice'
 import {useGetStarshipsQuery} from "../../api/starshipsSlice";
+import Header from "../pgTask/header/Header";
 
 export interface ProductInfoPageProps {
 
@@ -62,6 +63,7 @@ const ProductInfoPage:FC<ProductInfoPageProps> = memo(() => {
 
     return (
         <>
+            <Header/>
             <main className={styles.wrapper}>
             <ProductInfoHeader setView={changeView} nowView={nowView}/>
 
@@ -70,7 +72,6 @@ const ProductInfoPage:FC<ProductInfoPageProps> = memo(() => {
 
                 {nowView === LocalstorageValue.ProductCardView ?
                     <ProductCardsView
-                        test="test"
                         type={isStarships ? 'starships':'people'}
                         data={isStarships ? starships?.results : people?.results}
                         images={isStarships ? starshipImages : peopleImages}

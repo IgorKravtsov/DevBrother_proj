@@ -1,18 +1,17 @@
-import React, {FC, ReactElement, useEffect, useState} from 'react';
+import React, {FC, ReactElement, useEffect, useMemo, useState} from 'react';
 import styles from './header.module.scss';
 import backArrow from './img/backArrow.svg';
 import cart from './img/cart.svg';
 import {useNavigate} from "react-router-dom";
-import PanelCartPanel from "../panelCartCount/PanelCartPanel";
+import PanelCart from "../panelCartCount/PanelCartPanel";
 import {useActions} from "../../hooks/useActions";
 import * as util from "../../util";
 import {LocalstorageKey} from "../../types/LocalstorageKey";
-// import {setPeopleFromLocalstorageToRedux, setStarshipsFromLocalstorageToRedux} from "../../store/actions/_app/cart";
-import {setPeopleFromLocalstorageToCart, setStarshipsFromLocalstorageToCart} from '../../store/slices/cartSlice';
 import {useDispatch} from "react-redux";
 import Portal from "../portal/Portal";
 import CartSection from "../../sections/cartSection/CartSection";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
+import {setPeopleFromLocalstorageToCart, setStarshipsFromLocalstorageToCart} from "../../store/slices/cartSlice";
 
 export interface HeaderProps {
 
@@ -49,21 +48,29 @@ const Header:FC<HeaderProps> = (): ReactElement => {
         setIsVisible(bool);
     }
 
+    const memoTotal = useMemo(() => {
+        return util.getCountItems(people) + util.getCountItems(starships);
+    }, [people, starships])
+
     return (
         <header className={styles.header}>
             <p className={styles.img_wrapper}>
                 <img onClick={(e) => navigate(-1)} className={styles.img} src={backArrow} alt="Back"/>
             </p>
-            <p className={styles.img_wrapper}>
-                <img
-                    onClick={() => setIsPortalVisible(true)}
-                    onMouseEnter={() => switchVisible(true)}
-                    onMouseLeave={() => switchVisible(false)}
-                    className={styles.img} src={cart} alt="cart"/>
-            </p>
-            <PanelCartPanel isVisible={isVisible}/>
+            <ul className={styles.list}>
+                <li><p className={styles.img_wrapper}>
+                    <img
+                        onClick={() => setIsPortalVisible(true)}
+                        onMouseEnter={() => switchVisible(true)}
+                        onMouseLeave={() => switchVisible(false)}
+                        className={styles.img} src={cart} alt="cart"/>
+                </p></li>
+                <li><span className={styles.totalCount}>{memoTotal}</span></li>
+
+            </ul>
+            <PanelCart isVisible={isVisible}/>
             <Portal>
-                {isPortalVisible && <CartSection closeFunc={() => setIsPortalVisible(false)}/>}
+                <CartSection isVisible={isPortalVisible} closeFunc={() => setIsPortalVisible(false)}/>
             </Portal>
         </header>
     );

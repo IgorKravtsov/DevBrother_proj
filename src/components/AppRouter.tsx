@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Routes, } from "react-router-dom";
-import {   RouteNames } from "../routes";
+import { RouteNames } from "../routes";
 import MainPage from "../pages/mainPage/MainPage";
 import LoginPage from "../pages/loginPage/LoginPage";
 import RegisterPage from "../pages/registerPage/RegisterPage";
@@ -9,9 +9,7 @@ import ProductInfoPage from "../pages/productInfoPage/ProductInfoPage";
 import ErrorPage from "../pages/errorPage/ErrorPage";
 import ProductItemPage from "../pages/productItemPage/ProductItemPage";
 import CartSection from "../sections/cartSection/CartSection";
-
-
-
+import PgTask from "../pages/pgTask/PgTask";
 
 const AppRouter = () => {
 
@@ -25,7 +23,8 @@ const AppRouter = () => {
             <Route path={RouteNames.LOGIN} element={<LoginPage />} />
             <Route path={RouteNames.REGISTER} element={<RegisterPage />} />
             <Route path={RouteNames.PRODUCTS} element={<ProductsPage />} />
-            <Route path={RouteNames.CART} element={<CartSection closeFunc={() => {}} />} />
+            {/*<Route path={RouteNames.CART} element={<CartSection isVisible={true} closeFunc={() => {}} />} />*/}
+            <Route path={RouteNames.TASK} element={<PgTask />} />
             <Route path={RouteNames.PRODUCTS + "/:type"} element={<ProductInfoPage />} />
             <Route path={RouteNames.PRODUCTS + "/:type/:id"} element={<ProductItemPage />} />
             <Route path="*" element={<h1>Not found</h1>}/>

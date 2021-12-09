@@ -24,4 +24,7 @@
 .outLine {
   background: transparent;
   border: 1px var(--main-front-color) solid;
+  &:hover {
+    background-color: var(--main-front-color);
+  }
 }

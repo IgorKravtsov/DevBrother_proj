@@ -46,9 +46,20 @@
 }
 
 .btn {
-  width: 100px;
+  width: 200px;
+  min-width: 100px;
   margin-left: auto;
   margin-top: 100px;
   font-size: 20px;
   z-index: 100;
+  transition: .4s all;
+
+  &_added {
+    background-color: darkgreen;
+    border: 3px solid white;
+
+    &:hover {
+      background-color: darkgreen;
+    }
+  }
 }

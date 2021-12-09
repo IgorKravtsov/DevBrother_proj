@@ -1,4 +1,4 @@
-import {IProductImage} from "../pages/assets/productImages";
+import {IProductImage} from "../assets/productImages";
 
 
 export  const getImageByIndex = (images: IProductImage[], index: number): IProductImage => {

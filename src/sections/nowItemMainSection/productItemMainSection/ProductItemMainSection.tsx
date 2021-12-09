@@ -1,6 +1,6 @@
 import React, {FC, ReactElement} from 'react';
 import styles from './productItemMainSection.module.scss';
-import {IProductImage} from "../../../pages/assets/productImages";
+import {IProductImage} from "../../../assets/productImages";
 import {ISwapiPeople} from "../../../interfaces/swapi-response/IPeopleResponse";
 import {ISwapiStarship} from "../../../interfaces/swapi-response/IStarshipResponse";
 

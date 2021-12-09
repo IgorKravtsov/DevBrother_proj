@@ -9,6 +9,7 @@ import {useAppDispatch} from "../../hooks/useAppDispatch";
 import {useDispatch} from "react-redux";
 import {useGetPeopleQuery} from "../../api/peopleSlice";
 import {useGetStarshipsQuery} from "../../api/starshipsSlice";
+import Header from "../../components/header/Header";
 
 const ProductsPage = () => {
 
@@ -46,6 +47,7 @@ const ProductsPage = () => {
 
     return (
         <>
+            <Header/>
             <main className={styles.wrapper}>
                 <div className={styles.title_wrapper}>
                     <h2 className={styles.title}>CHOOSE STARWARS DATA YOU WANT</h2>

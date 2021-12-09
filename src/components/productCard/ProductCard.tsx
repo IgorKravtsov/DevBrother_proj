@@ -1,6 +1,6 @@
 import React, {FC, ReactElement} from 'react';
 import styles from './productCard.module.scss';
-import {IProductImage} from "../../pages/assets/productImages";
+import {IProductImage} from "../../assets/productImages";
 import SwapiImage from "../swapiImage/SwapiImage";
 
 export interface ProductCardProps {

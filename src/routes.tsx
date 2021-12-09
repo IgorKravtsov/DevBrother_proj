@@ -18,6 +18,7 @@ export enum RouteNames {
     PRODUCTS='/products',
     ERROR='/error',
     CART='/cart',
+    TASK='/task',
 
 }
 

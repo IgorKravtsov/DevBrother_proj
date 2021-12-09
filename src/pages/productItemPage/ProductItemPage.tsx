@@ -5,7 +5,7 @@ import {useTypedSelector} from "../../hooks/useTypedSelector";
 import {useActions} from "../../hooks/useActions";
 import {useParams} from "react-router-dom";
 import StarshipsItemMainSection from "../../sections/nowItemMainSection/starshipsItemMainSection/StarshipsItemMainSection";
-import {peopleImages, starshipImages} from "../assets/productImages";
+import {peopleImages, starshipImages} from "../../assets/productImages";
 import ProductItemMainSection from "../../sections/nowItemMainSection/productItemMainSection/ProductItemMainSection";
 import Spinner from "../../components/spinner/Spinner";
 // import {nowPerson} from "../../store/actions/_request/nowPerson";
@@ -15,6 +15,7 @@ import {useDispatch} from "react-redux";
 import {useAppDispatch} from "../../hooks/useAppDispatch";
 import {useGetOneStarshipQuery} from "../../api/starshipsSlice";
 import {useGetOnePersonQuery} from "../../api/peopleSlice";
+import Header from "../pgTask/header/Header";
 
 export interface ProductItemPageProps {
 
@@ -55,14 +56,17 @@ const ProductItemPage:FC<ProductItemPageProps> = (): ReactElement => {
 
 
     return (
-        <main className={styles.wrapper}>
-            {nowPersonIsLoading ||
-            nowStarshipIsLoading ? <Spinner/> :
-                <ProductItemMainSection
-                    img={util.getRandomImage(isStarships ? starshipImages : peopleImages)}
-                    data={isStarships ? nowStarship : nowPerson}
-                />}
-        </main>
+        <>
+            <Header />
+            <main className={styles.wrapper}>
+                {nowPersonIsLoading ||
+                nowStarshipIsLoading ? <Spinner/> :
+                    <ProductItemMainSection
+                        img={util.getRandomImage(isStarships ? starshipImages : peopleImages)}
+                        data={isStarships ? nowStarship : nowPerson}
+                    />}
+            </main>
+        </>
     );
 };
 
