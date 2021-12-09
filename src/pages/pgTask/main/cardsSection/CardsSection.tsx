@@ -31,7 +31,7 @@ const CardsSection:FC<CardsSectionProps> = (): ReactElement => {
                 gutterWidth={10}
                 className={styles.wrapper}
             >
-                {/*<li>*/}
+                {/*<li>wqe*/}
                 {/*    <Card card={{*/}
                 {/*        name: 'name1',*/}
                 {/*        categories: ['category1'],*/}
