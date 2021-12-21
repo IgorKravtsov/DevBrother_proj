@@ -1,15 +1,13 @@
 import React, {FC, ReactElement} from 'react';
-// import { SpringGrid, CSSGrid, measureItems, makeResponsive, layout } from 'react-stonecutter';
-import StackGrid from "react-stack-grid";
-
 import styles from './cardsSection.module.scss';
-import {cards} from "./cards";
+import StackGrid from "react-stack-grid";
 import Card from "./card/Card";
+import {ICard} from "./cards";
 
 
 
 export interface CardsSectionProps {
-
+    cards: ICard[]
 }
 
 // const Grid = makeResponsive(measureItems(CSSGrid), {
@@ -18,9 +16,7 @@ export interface CardsSectionProps {
 //   });
 
 
-const CardsSection:FC<CardsSectionProps> = (): ReactElement => {
-
-    // const {pinterest } = layout
+const CardsSection:FC<CardsSectionProps> = ({cards}): ReactElement => {
 
     return (
         <section className="cards">
@@ -31,46 +27,10 @@ const CardsSection:FC<CardsSectionProps> = (): ReactElement => {
                 gutterWidth={10}
                 className={styles.wrapper}
             >
-                {/*<li>*/}
-                {/*    <Card card={{*/}
-                {/*        name: 'name1',*/}
-                {/*        categories: ['category1'],*/}
-                {/*        img: util.getImageByIndex(peopleImages, 0),*/}
-
-                {/*    }} />*/}
-                {/*</li>*/}
-                {/*<li>*/}
-                {/*    <Card card={{*/}
-                {/*        name: 'name1',*/}
-                {/*        categories: ['category1', "category2", "category3"],*/}
-                {/*        img: util.getImageByIndex(peopleImages, 0),*/}
-
-                {/*    }} />*/}
-                {/*</li>*/}
-                {/*<li>*/}
-                {/*    <Card card={{*/}
-                {/*        name: 'name1',*/}
-                {/*        categories: ['category1', "category2", "category3"],*/}
-                {/*        img: util.getImageByIndex(peopleImages, 0),*/}
-
-                {/*    }} />*/}
-                {/*</li>*/}
-                {/*<li>*/}
-                {/*    <Card card={{*/}
-                {/*        name: 'name1',*/}
-                {/*        categories: ['category1', "category2", "category3"],*/}
-                {/*        img: util.getImageByIndex(peopleImages, 0),*/}
-
-                {/*    }} />*/}
-                {/*</li>*/}
-
-                 {/*<ul className={styles.wrapper}> */}
                     {cards.map((card, index) =>
                         <Card key={card.id} card={card} />
                     )}
-                 {/*</ul> */}
-            </StackGrid
-            >
+            </StackGrid>
         </section>
     );
 };
