@@ -41,19 +41,28 @@ p {
     display: flex;
     justify-content: space-between;
     width: 100%;
-    height: 4.667vw;
+    height: 7.667vw;
     list-style: none;
     padding: 0;
   }
 
   &_img_wrapper {
-    width: 2.667vw;
-    height: 2.667vw;
+    width: 6vw;
+    height: 6vw;
+
+  }
+
+  &_list_wrapper {
+    width: 56vw;
+    margin: 0 0 0 10vw;
   }
 
   &_list_item {
-    width: 15.667vw;
-    margin: 0 0 0 10vw;
+    //width: 15.667vw;
+    //margin: 0 0 0 10vw;
+    &:last-child {
+      margin-left:  auto;
+    }
 
   }
 
@@ -65,7 +74,7 @@ p {
 .name {
   padding: 0;
   margin: 0;
-  padding-left: 10vw;
+  //padding-left: 10vw;
   opacity: 0;
   visibility: hidden;
   transition: .3s all;
@@ -98,15 +107,17 @@ p {
   background-color: var(--main-back-color);
   color: var(--main-text-color);
   padding: 2vw 0 3vw 2vw;
-  // height: 50vw;
+  height: fit-content;
   opacity: 1;
   visibility: visible;
-  transition: .3s all;
+  transition: .3s opacity;
+  transform: scale(1);
   z-index: 10;
 
   &_hidden {
     opacity: 0;
     visibility: hidden;
+    transform: scale(0);
   }
 
   &_text {

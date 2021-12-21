@@ -10,6 +10,7 @@ import {UserDTO} from "../../interfaces/userDTO";
 import Error from "../../components/error/Error";
 import {useActions} from "../../hooks/useActions";
 import * as util from '../../util';
+import {setUserData} from "../../store/slices/userSlice";
 
 export interface LoginSectionProps {
     config: IFormConfig[];
@@ -22,7 +23,7 @@ const LoginSection:FC<LoginSectionProps> = ({config}): ReactElement => {
 
     const navigate = useNavigate();
     const {userData} = useTypedSelector(state => state.user);
-    const {setUserData} = useActions();
+    // const {setUserData} = useActions();
 
     useEffect(() => {
         setCredentialsError('');

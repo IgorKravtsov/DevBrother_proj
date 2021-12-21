@@ -8,6 +8,7 @@ import {IInputConfigs} from "../../types/IInputConfigs";
 import {UserDTO} from "../../interfaces/userDTO";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
 import {useActions} from "../../hooks/useActions";
+import {setUserData} from "../../store/slices/userSlice";
 
 export interface RegisterSectionProps {
     config: IFormConfig[];
@@ -15,7 +16,6 @@ export interface RegisterSectionProps {
 
 const RegisterSection:React.FC<RegisterSectionProps> = ({config}): ReactElement => {
     const [inputs, setInputs] = useState<IInputConfigs[]>([]);
-    const {setUserData} = useActions();
     const navigate = useNavigate();
 
     useEffect(() => {

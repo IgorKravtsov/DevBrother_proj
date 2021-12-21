@@ -18,7 +18,6 @@ import {
     // addPersonToCart
 } from '../../../store/slices/cartSlice';
 import {useTypedSelector} from "../../../hooks/useTypedSelector";
-import {state} from "../../../OLD DATA/_app/reducers/cart/state";
 
 export interface CartListProps {
 }

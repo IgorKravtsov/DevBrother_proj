@@ -1,6 +1,7 @@
 import {configureStore} from "@reduxjs/toolkit";
 import cart from './slices/cartSlice';
 import user from './slices/userSlice';
+import categories from './slices/categoriesSlice';
 import {peopleSlice} from "../api/peopleSlice";
 import {starshipsSlice} from "../api/starshipsSlice";
 // import * as reducers from "./mainReducer";
@@ -33,6 +34,7 @@ export const store = configureStore({
     reducer: {
         cart,
         user,
+        categories,
         [peopleSlice.reducerPath]: peopleSlice.reducer,
         [starshipsSlice.reducerPath]: starshipsSlice.reducer,
 

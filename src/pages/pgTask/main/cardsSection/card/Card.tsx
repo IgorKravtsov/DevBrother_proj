@@ -18,8 +18,8 @@ const Card:FC<CardProps> = (
             <p className={styles.name}>{name}</p>
             <ul className={styles.category_list}>
                 {categories.map((category,index) =>
-                    <li key={category} className={styles.category}>
-                        {category}
+                    <li key={category.id} className={styles.category}>
+                        {category.data}
                     </li>
                 )}
             </ul>
